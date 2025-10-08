@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>Unit 2 | Permission & Request Quiz</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body data-unit="2">
+  <div class="progress-track"><div class="progress-bar"></div></div>
+  <header class="app-header">
+    <div class="header-left">
+      <div class="header-icon"><i data-lucide="check-square"></i></div>
+      <div class="header-title-wrap">
+        <h1 class="header-title">Unit 2: Permission & Request</h1>
+        <div class="header-sub">แบบทดสอบ 10 ข้อ | โครงสร้างการขออนุญาตและการร้องขอ</div>
+      </div>
+    </div>
+    <nav style="display:flex;align-items:center;gap:.65rem;">
+      <a href="homepage.html" class="back-link"><i data-lucide="arrow-left"></i> กลับ</a>
+      <button id="themeToggle" class="theme-toggle" type="button"></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="quiz-intro">
+      แบบฝึกหัดนี้เน้นการใช้ประโยค Permission และ Request ในระดับความสุภาพต่าง ๆ โปรดเลือกคำตอบที่ถูกต้องที่สุด
+    </section>
+
+    <section class="quiz-grid" aria-label="คำถามแบบทดสอบ">
+      <div class="quiz-card" data-correct="a">
+        <p class="quiz-q">1. คำว่า “Permission” หมายถึงอะไร?</p>
+        <ul class="options">
+          <li class="option"><input id="u2q1a" name="q1" type="radio" value="a"><label for="u2q1a" class="option-label">การขออนุญาตเพื่อทำบางสิ่ง</label></li>
+          <li class="option"><input id="u2q1b" name="q1" type="radio" value="b"><label for="u2q1b" class="option-label">การถามความคิดเห็นของผู้อื่น</label></li>
+          <li class="option"><input id="u2q1c" name="q1" type="radio" value="c"><label for="u2q1c" class="option-label">การให้ข้อมูลส่วนตัว</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="a">
+        <p class="quiz-q">2. คำว่า “Request” หมายถึงอะไร?</p>
+        <ul class="options">
+          <li class="option"><input id="u2q2a" name="q2" type="radio" value="a"><label for="u2q2a" class="option-label">การขอให้คนอื่นทำบางสิ่งให้เรา</label></li>
+          <li class="option"><input id="u2q2b" name="q2" type="radio" value="b"><label for="u2q2b" class="option-label">การรายงานเหตุการณ์</label></li>
+          <li class="option"><input id="u2q2c" name="q2" type="radio" value="c"><label for="u2q2c" class="option-label">การอนุญาตให้ทำบางสิ่ง</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="a">
+        <p class="quiz-q">3. ข้อใดเป็นประโยคขออนุญาตแบบ “ไม่เป็นทางการ”?</p>
+        <ul class="options">
+          <li class="option"><input id="u2q3a" name="q3" type="radio" value="a"><label for="u2q3a" class="option-label">Can I use your phone?</label></li>
+          <li class="option"><input id="u2q3b" name="q3" type="radio" value="b"><label for="u2q3b" class="option-label">May I open the window?</label></li>
+          <li class="option"><input id="u2q3c" name="q3" type="radio" value="c"><label for="u2q3c" class="option-label">Could I speak to the manager?</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="c">
+        <p class="quiz-q">4. “May I use your computer to print a document?” เป็นระดับความสุภาพแบบใด?</p>
+        <ul class="options">
+          <li class="option"><input id="u2q4a" name="q4" type="radio" value="a"><label for="u2q4a" class="option-label">Informal</label></li>
+          <li class="option"><input id="u2q4b" name="q4" type="radio" value="b"><label for="u2q4b" class="option-label">Semi-formal</label></li>
+          <li class="option"><input id="u2q4c" name="q4" type="radio" value="c"><label for="u2q4c" class="option-label">Formal</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="b">
+        <p class="quiz-q">5. หากต้องการร้องขออย่างสุภาพ ควรใช้โครงสร้างประโยคใด?</p>
+        <ul class="options">
+          <li class="option"><input id="u2q5a" name="q5" type="radio" value="a"><label for="u2q5a" class="option-label">Can you…?</label></li>
+          <li class="option"><input id="u2q5b" name="q5" type="radio" value="b"><label for="u2q5b" class="option-label">Would you mind…?</label></li>
+          <li class="option"><input id="u2q5c" name="q5" type="radio" value="c"><label for="u2q5c" class="option-label">Do you want to…?</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="b">
+        <p class="quiz-q">6. ตัวอย่างใดเป็นประโยค Permission แบบไม่เป็นทางการ?</p>
+        <ul class="options">
+          <li class="option"><input id="u2q6a" name="q6" type="radio" value="a"><label for="u2q6a" class="option-label">May I speak with the manager?</label></li>
+          <li class="option"><input id="u2q6b" name="q6" type="radio" value="b"><label for="u2q6b" class="option-label">Can I sit here?</label></li>
+          <li class="option"><input id="u2q6c" name="q6" type="radio" value="c"><label for="u2q6c" class="option-label">Could you open the window?</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="b">
+        <p class="quiz-q">7. ตัวอย่างใดเป็นประโยค Request แบบเป็นทางการ?</p>
+        <ul class="options">
+          <li class="option"><input id="u2q7a" name="q7" type="radio" value="a"><label for="u2q7a" class="option-label">Can you pass me the salt?</label></li>
+          <li class="option"><input id="u2q7b" name="q7" type="radio" value="b"><label for="u2q7b" class="option-label">Would you mind helping me with this project?</label></li>
+          <li class="option"><input id="u2q7c" name="q7" type="radio" value="c"><label for="u2q7c" class="option-label">Can I borrow your pen?</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="b">
+        <p class="quiz-q">8. หากต้องการ “อนุญาต” สามารถตอบว่าอย่างไร?</p>
+        <ul class="options">
+          <li class="option"><input id="u2q8a" name="q8" type="radio" value="a"><label for="u2q8a" class="option-label">I’m afraid you can’t.</label></li>
+          <li class="option"><input id="u2q8b" name="q8" type="radio" value="b"><label for="u2q8b" class="option-label">Yes, you can.</label></li>
+          <li class="option"><input id="u2q8c" name="q8" type="radio" value="c"><label for="u2q8c" class="option-label">Sorry, not this time.</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="a">
+        <p class="quiz-q">9. หากต้องการ “ปฏิเสธคำขออย่างสุภาพ” ควรพูดว่าอย่างไร?</p>
+        <ul class="options">
+          <li class="option"><input id="u2q9a" name="q9" type="radio" value="a"><label for="u2q9a" class="option-label">I’m sorry, I can’t.</label></li>
+          <li class="option"><input id="u2q9b" name="q9" type="radio" value="b"><label for="u2q9b" class="option-label">Of course.</label></li>
+          <li class="option"><input id="u2q9c" name="q9" type="radio" value="c"><label for="u2q9c" class="option-label">Sure.</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="a">
+        <p class="quiz-q">10. เหตุใดการใช้ระดับความสุภาพ (Formality) จึงสำคัญ?</p>
+        <ul class="options">
+          <li class="option"><input id="u2q10a" name="q10" type="radio" value="a"><label for="u2q10a" class="option-label">เพื่อแสดงความเคารพและเหมาะสมกับสถานการณ์</label></li>
+          <li class="option"><input id="u2q10b" name="q10" type="radio" value="b"><label for="u2q10b" class="option-label">เพื่อพูดให้เร็วขึ้น</label></li>
+          <li class="option"><input id="u2q10c" name="q10" type="radio" value="c"><label for="u2q10c" class="option-label">เพื่อให้ดูเป็นกันเอง</label></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button id="submitQuiz" class="button" type="button">ตรวจคำตอบ<div class="spinner"></div></button>
+      <button id="restartQuiz" class="button secondary" type="button">เริ่มใหม่</button>
+    </div>
+
+    <div id="resultContainer"></div>
+    <div id="liveRegion" aria-live="polite"></div>
+  </main>
+
+  <canvas id="confettiCanvas"></canvas>
+  <script src="quiz.js"></script>
+</body>
+</html>

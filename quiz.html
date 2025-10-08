@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - English Classroom</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background: linear-gradient(135deg, #fafafa 0%, #fff6f6 100%);
+            min-height: 100vh;
+        }
+
+        .nav-item {
+            transition: all 0.3s;
+        }
+        .nav-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .hero-bg {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('E.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.08;
+            z-index: 0;
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.09) 0%, rgba(255,255,255,0.96) 95%);
+            z-index: 1;
+        }
+        .hero-bg > * { position: relative; z-index: 2; }
+
+        .unit-card {
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(140deg, #fff 65%, #ffeaea 120%);
+            border: 1.5px solid #fca5a5;
+        }
+        .unit-card:hover {
+            transform: translateY(-10px) scale(1.025);
+            box-shadow: 0 20px 50px #ef444433;
+            border-color: #ef4444;
+        }
+        .unit-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, #fca5a522 0%, transparent 70%);
+            opacity: 0.19;
+            pointer-events: none;
+        }
+        .unit-badge {
+            animation: badge-pulse 2s infinite;
+        }
+        @keyframes badge-pulse {
+            0%, 100% { transform: scale(1); opacity: 1;}
+            50% { transform: scale(1.08); opacity: 0.8;}
+        }
+        .unit-icon {
+            transition: all 0.5s;
+        }
+        .unit-card:hover .unit-icon {
+            transform: scale(1.12) rotate(-3deg);
+        }
+        .fade-in {
+            animation: fadeInUp 0.8s cubic-bezier(.39,.58,.57,1) forwards;
+            opacity: 0;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .progress-dot {
+            transition: all 0.3s;
+        }
+        .progress-dot.active {
+            transform: scale(1.25);
+            box-shadow: 0 0 10px #991b1b;
+        }
+        /* Shine Effect */
+        .shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .shine::after {
+            content: '';
+            position: absolute;
+            top: -80%;
+            left: -80%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, #fff6, transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        .shine:hover::after {
+            transform: translateX(100%);
+        }
+        /* Particle Effect */
+        .particle {
+            position: absolute;
+            width: 5px; height: 5px;
+            background: #ef444488;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle-float 5s linear infinite;
+        }
+        @keyframes particle-float {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(60px); opacity: 0;}
+        }
+        .gradient-title {
+            background: linear-gradient(90deg, #991b1b 20%, #ef4444 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 2.6s linear infinite alternate;
+            background-size: 200% 200%;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%;}
+            100% { background-position: 100% 50%;}
+        }
+        @media (max-width: 400px) {.unit-badge {font-size: 0.7rem;}}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="py-3 px-6 flex justify-between items-center z-50 bg-red-600 bg-opacity-95 backdrop-blur-sm shadow-2xl">
+        <div class="flex items-center space-x-3">
+            <img src="Logo.JPG" alt="Main Logo" class="rounded-full shadow-2xl ring-4 ring-white w-14 h-14" onerror="this.onerror=null; this.src='https://placehold.co/56x56/dc2626/ffffff?text=Logo';">
+            <a href="homepage.html" class="text-xl font-extrabold text-gray-100 hover:text-red-300 transition-colors duration-300">EnglishClassroom</a>
+        </div>
+        <nav class="flex items-center space-x-6">
+            <a href="course.html" class="nav-item flex flex-col items-center group">
+                <div class="bg-white p-3 rounded-lg mb-1 shadow-md">
+                    <i data-lucide="folder" class="w-7 h-7 text-red-600"></i>
+                </div>
+                <span class="text-sm font-semibold text-gray-900">Courses</span>
+            </a>
+            <a href="quiz.html" class="nav-item flex flex-col items-center group">
+                <div class="bg-red-800 p-3 rounded-lg mb-1 shadow-md ring-2 ring-white">
+                    <i data-lucide="file-text" class="w-7 h-7 text-white"></i>
+                </div>
+                <span class="text-sm font-semibold text-gray-100">Quiz</span>
+            </a>
+            <a href="ebook.html" class="nav-item flex flex-col items-center group">
+                <div class="bg-white p-3 rounded-lg mb-1 shadow-md">
+                    <i data-lucide="book-open" class="w-7 h-7 text-red-600"></i>
+                </div>
+                <span class="text-sm font-semibold text-gray-900">E-Books</span>
+            </a>
+            <a href="gradebook.html" class="nav-item flex flex-col items-center group">
+                <div class="bg-white p-3 rounded-lg mb-1 shadow-md">
+                    <i data-lucide="bar-chart-3" class="w-7 h-7 text-red-600"></i>
+                </div>
+                <span class="text-sm font-semibold text-gray-900">Gradebook</span>
+            </a>
+        </nav>
+        <div class="flex items-center space-x-2">
+            <a href="Profile.html" class="flex items-center bg-white px-4 py-2 rounded-full hover:bg-gray-100 transition-colors duration-300 shadow-md">
+                <i data-lucide="user" class="w-6 h-6 text-red-600 stroke-[2.5] mr-2"></i>
+                <span class="text-sm font-medium text-gray-800">Profile</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative hero-bg min-h-screen pt-20 pb-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Title Section -->
+            <div class="text-center mb-14 fade-in">
+                <div class="float-animation inline-block mb-6">
+                    <div class="bg-gradient-to-br from-red-600 to-red-800 p-6 rounded-3xl shadow-2xl">
+                        <i data-lucide="brain" class="w-20 h-20 text-white"></i>
+                    </div>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">
+                    <span class="gradient-title">EnglishClassroom Quiz</span>
+                </h1>
+                <p class="text-gray-700 text-2xl mb-4">ทดสอบความรู้ภาษาอังกฤษของคุณ<br>
+                    <span class="text-base text-gray-500">
+                        <i data-lucide="info" class="w-5 h-5 text-red-400 inline-block"></i>
+                        Quiz ออกแบบให้ตรงกับเนื้อหาที่เรียนจริง พร้อมเฉลยทันที!
+                    </span>
+                </p>
+                <div class="flex items-center justify-center gap-3 mt-2">
+                    <div class="bg-red-500 bg-opacity-20 px-6 py-2 rounded-full border border-red-300">
+                        <span class="text-red-700 font-semibold">📚 3 Units</span>
+                    </div>
+                    <div class="bg-white bg-opacity-60 px-6 py-2 rounded-full border border-red-100 text-gray-700">
+                        <span class="font-semibold">✅ 30 Questions</span>
+                    </div>
+                    <div class="bg-gray-200 px-6 py-2 rounded-full border border-gray-400">
+                        <span class="text-gray-800 font-semibold">⭐ Instant Results</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section: Quiz Introduction and Guide -->
+            <div class="glass-effect rounded-2xl shadow-2xl mb-14 p-8 fade-in" style="animation-delay:.10s">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="bg-white p-3 rounded-lg shadow">
+                        <i data-lucide="info" class="w-7 h-7 text-red-600"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900">แนะนำแบบทดสอบ</h2>
+                </div>
+                <ul class="list-disc pl-7 text-gray-800 text-lg space-y-1 mb-3">
+            <li>แบบทดสอบแต่ละชุดออกแบบให้สอดคล้องกับเนื้อหาในแต่ละยูนิต</li>
+            <li>ช่วยเสริมความเข้าใจและประเมินความสามารถทางภาษาอย่างเป็นระบบ</li>
+            <li>ครอบคลุมทุกทักษะที่จำเป็นต่อการสื่อสารทั้ง ฟัง พูด อ่าน และเขียน</li>
+            <li>แสดงเฉลย และ คำอธิบายทันทีหลังทำแบบทดสอบเสร็จ</li>
+            <li>บันทึกคะแนนอัตโนมัติใน Gradebook เพื่อดูพัฒนาการของผู้เรียน</li>
+            <li>สามารถทำแบบทดสอบซ้ำได้ไม่จำกัด เพื่อทบทวนและพัฒนาทักษะอย่างต่อเนื่อง</li>
+
+                </ul>
+                <div class="bg-gray-100 rounded-xl p-4 shadow text-gray-700">
+                    <b>หมายเหตุ:</b> หากต้องการทบทวนก่อนทำแบบทดสอบ คลิกที่ปุ่ม "Courses" เพื่อกลับไปอ่านเนื้อหายูนิต
+                </div>
+            </div>
+
+            <!-- Unit Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Unit 1 -->
+                <div class="unit-card rounded-3xl p-8 shadow-2xl cursor-pointer shine fade-in" style="animation-delay: 0.2s;">
+                    <div class="relative">
+                        <!-- Badge -->
+                        <div class="absolute -top-4 -right-4 bg-yellow-400 text-yellow-900 px-4 py-2 rounded-full font-bold text-sm shadow-lg unit-badge">
+                            Basic
+                        </div>
+                        <!-- Icon -->
+                        <div class="text-center mb-6 unit-icon">
+                            <div class="bg-white bg-opacity-20 backdrop-blur-sm w-28 h-28 rounded-3xl flex items-center justify-center mx-auto shadow-xl">
+                                <i data-lucide="user-circle" class="w-16 h-16 text-red-500"></i>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <div class="text-center">
+                            <h2 class="text-4xl font-bold text-red-800 mb-2">Unit 1</h2>
+                            <h3 class="text-2xl text-red-700 mb-3 font-semibold">Introductions</h3>
+                            <p class="text-gray-800 mb-6 text-base leading-relaxed">
+                                ทดสอบความเข้าใจเกี่ยวกับการทักทาย การแนะนำตัวเอง<br>แนะนำผู้อื่น และ small talk
+                            </p>
+                            <div class="grid grid-cols-2 gap-3 mb-6">
+                                <div class="bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i data-lucide="list" class="w-5 h-5 text-red-500 mx-auto mb-1"></i>
+                                    <p class="text-red-700 font-bold">10 คำถาม</p>
+                                </div>
+                                <div class="bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i data-lucide="clock" class="w-5 h-5 text-red-500 mx-auto mb-1"></i>
+                                    <p class="text-red-700 font-bold">15 นาที</p>
+                                </div>
+                            </div>
+                            <a href="quizunit1.html" class="block w-full bg-red-600 text-white font-bold py-4 rounded-xl hover:bg-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                                เริ่มทำแบบทดสอบ →
+                            </a>
+                        </div>
+                        <div class="flex justify-center mt-6 gap-2">
+                            <div class="progress-dot w-2 h-2 bg-red-400 rounded-full opacity-60"></div>
+                            <div class="progress-dot w-2 h-2 bg-red-400 rounded-full opacity-30"></div>
+                            <div class="progress-dot w-2 h-2 bg-red-400 rounded-full opacity-30"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Unit 2 -->
+                <div class="unit-card rounded-3xl p-8 shadow-2xl cursor-pointer shine fade-in" style="animation-delay: 0.4s;">
+                    <div class="relative">
+                        <div class="absolute -top-4 -right-4 bg-green-400 text-green-900 px-4 py-2 rounded-full font-bold text-sm shadow-lg unit-badge">
+                            Intermediate
+                        </div>
+                        <div class="text-center mb-6 unit-icon">
+                            <div class="bg-white bg-opacity-20 backdrop-blur-sm w-28 h-28 rounded-3xl flex items-center justify-center mx-auto shadow-xl">
+                                <i data-lucide="hand" class="w-16 h-16 text-red-500"></i>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h2 class="text-4xl font-bold text-red-800 mb-2">Unit 2</h2>
+                            <h3 class="text-2xl text-red-700 mb-3 font-semibold">Permission & Request</h3>
+                            <p class="text-gray-800 mb-6 text-base leading-relaxed">
+                                วัดความเข้าใจการขอร้อง การขออนุญาต<br>และการสนทนาในสถานการณ์จริง
+                            </p>
+                            <div class="grid grid-cols-2 gap-3 mb-6">
+                                <div class="bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i data-lucide="list" class="w-5 h-5 text-red-500 mx-auto mb-1"></i>
+                                    <p class="text-red-700 font-bold">10 คำถาม</p>
+                                </div>
+                                <div class="bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i data-lucide="clock" class="w-5 h-5 text-red-500 mx-auto mb-1"></i>
+                                    <p class="text-red-700 font-bold">15 นาที</p>
+                                </div>
+                            </div>
+                            <a href="quizunit2.html" class="block w-full bg-red-600 text-white font-bold py-4 rounded-xl hover:bg-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                                เริ่มทำแบบทดสอบ →
+                            </a>
+                        </div>
+                        <div class="flex justify-center mt-6 gap-2">
+                            <div class="progress-dot w-2 h-2 bg-red-400 rounded-full opacity-30"></div>
+                            <div class="progress-dot w-2 h-2 bg-red-400 rounded-full opacity-60"></div>
+                            <div class="progress-dot w-2 h-2 bg-red-400 rounded-full opacity-30"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Unit 3 -->
+                <div class="unit-card rounded-3xl p-8 shadow-2xl cursor-pointer shine fade-in" style="animation-delay: 0.6s;">
+                    <div class="relative">
+                        <div class="absolute -top-4 -right-4 bg-orange-400 text-orange-900 px-4 py-2 rounded-full font-bold text-sm shadow-lg unit-badge">
+                            Advanced
+                        </div>
+                        <div class="text-center mb-6 unit-icon">
+                            <div class="bg-white bg-opacity-20 backdrop-blur-sm w-28 h-28 rounded-3xl flex items-center justify-center mx-auto shadow-xl">
+                                <i data-lucide="heart" class="w-16 h-16 text-red-500"></i>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h2 class="text-4xl font-bold text-red-800 mb-2">Unit 3</h2>
+                            <h3 class="text-2xl text-red-700 mb-3 font-semibold">Like & Dislike</h3>
+                            <p class="text-gray-800 mb-6 text-base leading-relaxed">
+                                ทดสอบความเข้าใจเรื่องการแสดงความชอบ<br>ไม่ชอบ และการให้เหตุผลประกอบ
+                            </p>
+                            <div class="grid grid-cols-2 gap-3 mb-6">
+                                <div class="bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i data-lucide="list" class="w-5 h-5 text-red-500 mx-auto mb-1"></i>
+                                    <p class="text-red-700 font-bold">10 คำถาม</p>
+                                </div>
+                                <div class="bg-white bg-opacity-70 rounded-xl p-3">
+                                    <i data-lucide="clock" class="w-5 h-5 text-red-500 mx-auto mb-1"></i>
+                                    <p class="text-red-700 font-bold">15 นาที</p>
+                                </div>
+                            </div>
+                            <a href="quizunit3.html" class="block w-full bg-red-600 text-white font-bold py-4 rounded-xl hover:bg-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                                เริ่มทำแบบทดสอบ →
+                            </a>
+                        </div>
+                        <div class="flex justify-center mt-6 gap-2">
+                            <div class="progress-dot w-2 h-2 bg-red-400 rounded-full opacity-30"></div>
+                            <div class="progress-dot w-2 h-2 bg-red-400 rounded-full opacity-30"></div>
+                            <div class="progress-dot w-2 h-2 bg-red-400 rounded-full opacity-60"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Particles -->
+            <div id="particles-container"></div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <div id="footer-container"></div>
+<script>
+         lucide.createIcons();
+function getCurrentUserEmailKey() {
+    const userData = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (!userData || !userData.email) return null;
+    return userData.email.replace(/[.#$[\]]/g, '_');
+}
+function getQuizScores() {
+    const emailKey = getCurrentUserEmailKey();
+    let userScores = {};
+    if (emailKey) userScores = JSON.parse(localStorage.getItem('quiz_scores_' + emailKey)) || {};
+    return [
+        { unit: 1, title: "Unit 1: Introduction & Small Talk", ...(userScores.unit1||{}) },
+        { unit: 2, title: "Unit 2: Permission & Request", ...(userScores.unit2||{}) },
+        { unit: 3, title: "Unit 3: Likes & Dislikes", ...(userScores.unit3||{}) }
+    ];
+}
+function getGrade(score) {
+    if (score >= 9) return 'A';
+    if (score >= 8) return 'B+';
+    if (score >= 7) return 'B';
+    if (score >= 6) return 'C+';
+    if (score >= 5) return 'C';
+    if (score >= 4) return 'D';
+    return 'F';
+}
+function renderGradeTable() {
+    const quizScores = getQuizScores();
+    const table = document.getElementById('gradesTableBody');
+    let sum = 0, count = 0, maxScore = 0;
+    table.innerHTML = '';
+    quizScores.forEach((q, idx) => {
+        let score = typeof q.score === "number" ? q.score : (q.score ? parseInt(q.score) : '-');
+        let date = q.date;
+        let grade = (typeof score === 'number' && !isNaN(score)) ? getGrade(score) : '-';
+        let done = (typeof score === 'number' && !isNaN(score)) ? '✔️' : '❌';
+        let dateStr = date ? new Date(date).toLocaleDateString('th-TH', { year: "numeric", month: "short", day: "numeric" }) : "-";
+        if (typeof score === 'number' && !isNaN(score)) {
+            sum += score;
+            count++;
+            if (score > maxScore) maxScore = score;
+        }
+        table.innerHTML += `
+            <tr class="grade-row">
+                <td class="px-6 py-4">${idx+1}</td>
+                <td class="px-6 py-4">${q.title}</td>
+                <td class="px-6 py-4 text-center">${dateStr}</td>
+                <td class="px-6 py-4 text-center">${score}/10</td>
+                <td class="px-6 py-4 text-center">${grade}</td>
+                <td class="px-6 py-4 text-center">${done}</td>
+            </tr>
+        `;
+    });
+    document.querySelectorAll('.stat-card')[0].querySelector('span').innerText = quizScores.length;
+    document.querySelectorAll('.stat-card')[1].querySelector('span').innerText = count ? (sum/count).toFixed(2) : '0.0';
+    document.querySelectorAll('.stat-card')[2].querySelector('span').innerText = maxScore;
+    document.querySelectorAll('.stat-card')[3].querySelector('span').innerText = getGrade(count ? (sum/count) : 0);
+}
+function renderCharts() {
+    const quizScores = getQuizScores();
+    const labels = quizScores.map((q,i) => 'U'+(i+1)+": "+q.title.split(': ').slice(1).join(': '));
+    const scores = quizScores.map(q => (typeof q.score === "number") ? q.score : (q.score ? parseInt(q.score) : 0));
+    // Bar Chart
+    const barCtx = document.getElementById('trendChart').getContext('2d');
+    new Chart(barCtx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'คะแนน',
+                data: scores,
+                backgroundColor: [ '#dc2626', '#10b981', '#3b82f6' ],
+                borderColor: [ '#dc2626', '#10b981', '#3b82f6' ],
+                borderWidth: 2,
+                borderRadius: 7,
+                maxBarThickness: 44,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true, labels: { color: "#fff", font: { size: 16 } } },
+                title: { display: false }
+            },
+            scales: {
+                y: { beginAtZero: true, max: 10, ticks: { color: '#fff', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.08)' } },
+                x: { ticks: { color: '#fff', font: { size: 14 }, maxRotation: 0, minRotation: 0 }, grid: { color: 'rgba(255,255,255,0.03)' } }
+            }
+        }
+    });
+    // Pie Chart
+    const pieCtx = document.getElementById('distributionChart').getContext('2d');
+    new Chart(pieCtx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: scores,
+                backgroundColor: [ '#dc2626', '#10b981', '#3b82f6' ],
+                borderColor: '#222',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: { color: '#fff', font: { size: 16 } }
+                }
+            },
+            responsive: true
+        }
+    });
+}
+window.onload = function() {
+    renderGradeTable();
+    renderCharts();
+    lucide.createIcons();
+};
+</script>
+</body>
+</html>

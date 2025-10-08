@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - EnglishClassroom</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #0d1117;
+            margin: 0;
+            padding: 0;
+            padding-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        main { flex: 1; }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+        }
+        .nav-item { transition: all 0.3s ease; }
+        .nav-item:hover { transform: translateY(-3px); }
+        html { scroll-behavior: smooth; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 1.0s ease-out forwards; }
+        /* Responsive Table */
+        .profile-grade-table th, .profile-grade-table td {
+            color: #fff !important;
+            padding: 8px 10px;
+            font-size: 0.94rem;
+        }
+        .profile-grade-table {
+            width: 100%;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            margin-top: 1.5rem;
+            background: #222b39;
+        }
+        .profile-grade-table thead {
+            background: #991b1b;
+        }
+        .profile-grade-table tr:nth-child(even) {
+            background: #243045;
+        }
+        .profile-grade-table tr:nth-child(odd) {
+            background: #222b39;
+        }
+        .profile-grade-table th {
+            font-weight: 600;
+            letter-spacing: .3px;
+        }
+        .profile-grade-table td {
+            text-align: center;
+        }
+        .profile-grade-table td:first-child, .profile-grade-table th:first-child {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header class="py-3 px-6 flex justify-between items-center z-50 bg-red-600 bg-opacity-95 backdrop-blur-sm shadow-2xl">
+        <div class="flex items-center space-x-3">
+            <img src="Logo.JPG" alt="Main Logo" class="rounded-full shadow-2xl ring-4 ring-white w-14 h-14" onerror="this.onerror=null; this.src='https://placehold.co/56x56/dc2626/ffffff?text=Logo';">
+            <a href="homepage.html" class="text-xl font-extrabold text-gray-100 hover:text-red-300 transition-colors duration-300">EnglishClassroom</a>
+        </div>
+        <div class="flex items-center space-x-2">
+            <a href="Profile.html" class="flex items-center bg-white px-4 py-2 rounded-full hover:bg-gray-100 transition-colors duration-300 shadow-md">
+                <i data-lucide="user" class="w-6 h-6 text-red-600 stroke-[2.5] mr-2"></i>
+                <span class="text-sm font-medium text-gray-800">Profile</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-8">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-red-500 mb-8 text-center fade-in">
+            โปรไฟล์ผู้ใช้งาน
+        </h1>
+        <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column: Profile Card -->
+            <div class="lg:col-span-1 fade-in" style="animation-delay: 0.1s;">
+                <div class="bg-gray-800 rounded-xl p-6 shadow-2xl text-center">
+                    <img id="profileImage" 
+                         src="https://via.placeholder.com/150/0d1117/ffffff?text=U"  
+                         alt="User Profile Picture" 
+                         class="w-32 h-32 mx-auto rounded-full ring-4 ring-red-500 mb-4 object-cover">
+                    <input type="file" id="fileInput" accept="image/png, image/jpeg" class="hidden">
+                    <h2 id="profileUsername" class="text-3xl font-bold text-white mb-2">
+                        Username
+                    </h2>
+                    <p id="profileEmail" class="text-red-300 mb-1">
+                        <i data-lucide="mail" class="w-4 h-4 inline-block mr-1"></i> 
+                        email@example.com
+                    </p>
+                    <div class="text-left mt-6 border-t border-gray-700 pt-4">
+                        <p id="profileJoinDate" class="text-gray-400 text-sm mb-2">
+                            <i data-lucide="calendar" class="w-4 h-4 inline-block mr-2 text-red-400"></i>
+                            เข้าร่วมเมื่อ: 1 มกราคม 2566
+                        </p>
+                        <p class="text-gray-400 text-sm mb-2">
+                            <i data-lucide="star" class="w-4 h-4 inline-block mr-2 text-yellow-400 fill-yellow-400"></i>
+                            ระดับ: Intermediate B1
+                        </p>
+                    </div>
+                </div>
+                <!-- Action Buttons -->
+                <div class="space-y-4 mt-4">
+                    <a href="homepage.html" class="block w-full text-center bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 rounded-xl shadow-lg transition-colors duration-300">
+                        <i data-lucide="arrow-left" class="w-5 h-5 inline-block mr-2"></i>
+                        ย้อนกลับหน้าหลัก
+                    </a>
+                    <button id="editProfileButton" 
+                         onclick="document.getElementById('fileInput').click()" 
+                        class="block w-full text-center bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-xl shadow-lg transition-colors duration-300">
+                        <i data-lucide="camera" class="w-4 h-4 inline-block mr-2"></i>
+                        แก้ไขรูปโปรไฟล์
+                    </button>
+                    <p class="text-xs text-gray-400 mt-2">*ใช้ไฟล์ .png และ .jpeg เท่านั้น</p>
+                </div>
+            </div>
+            <!-- Right Column: Progress & Settings -->
+            <div class="lg:col-span-2 space-y-6 fade-in" style="animation-delay: 0.3s;">
+                <!-- Progress Summary -->
+                <div class="bg-gray-800 rounded-xl p-6 shadow-2xl mb-6">
+                    <h3 class="text-2xl font-bold text-red-500 mb-4 border-b border-gray-700 pb-2">
+                        สรุปความคืบหน้า
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <div class="p-3 rounded-lg bg-gray-700">
+                            <i data-lucide="check-circle" class="w-8 h-8 mx-auto mb-1 text-green-400 fill-green-900/50"></i>
+                            <p class="text-3xl font-extrabold text-white" id="profile-quiz-completed">0</p>
+                            <p class="text-gray-400 text-sm">บทเรียนที่เสร็จสิ้น</p>
+                        </div>
+                        <div class="p-3 rounded-lg bg-gray-700">
+                            <i data-lucide="award" class="w-8 h-8 mx-auto mb-1 text-yellow-400 fill-yellow-900/50"></i>
+                            <p class="text-3xl font-extrabold text-white" id="profile-quiz-avg">0%</p>
+                            <p class="text-gray-400 text-sm">คะแนนเฉลี่ย Quiz</p>
+                        </div>
+                        <div class="p-3 rounded-lg bg-gray-700">
+                            <i data-lucide="clock" class="w-8 h-8 mx-auto mb-1 text-blue-400 fill-blue-900/50"></i>
+                            <p class="text-3xl font-extrabold text-white">12.5</p>
+                            <p class="text-gray-400 text-sm">ชม. การเรียนรู้</p>
+                        </div>
+                        <div class="p-3 rounded-lg bg-gray-700">
+                            <i data-lucide="book-open-text" class="w-8 h-8 mx-auto mb-1 text-indigo-400 fill-indigo-900/50"></i>
+                            <p class="text-3xl font-extrabold text-white">3</p>
+                            <p class="text-gray-400 text-sm">E-Books ที่อ่าน</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Grade Summary Table -->
+                <div class="bg-gray-800 rounded-xl p-6 shadow-2xl">
+                    <h3 class="text-2xl font-bold text-red-500 mb-4 border-b border-gray-700 pb-2">
+                        คะแนนแต่ละยูนิตของฉัน
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="profile-grade-table">
+                            <thead>
+                                <tr>
+                                    <th>ยูนิต</th>
+                                    <th>คะแนน</th>
+                                    <th>เกรด</th>
+                                    <th>วันที่ทำ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="profile-grade-table-body">
+                                <!-- Filled by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Settings & Account -->
+                <div class="bg-gray-800 rounded-xl p-6 shadow-2xl">
+                    <h3 class="text-2xl font-bold text-red-500 mb-4 border-b border-gray-700 pb-2">
+                        การตั้งค่าและบัญชี
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-gray-700/50 rounded-lg hover:bg-gray-700 transition-colors cursor-pointer">
+                            <div class="flex items-center">
+                                <i data-lucide="key" class="w-5 h-5 text-red-400 mr-3"></i>
+                                <span class="text-white">เปลี่ยนรหัสผ่าน</span>
+                            </div>
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400"></i>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-700/50 rounded-lg hover:bg-gray-700 transition-colors cursor-pointer">
+                            <div class="flex items-center">
+                                <i data-lucide="globe" class="w-5 h-5 text-red-400 mr-3"></i>
+                                <span class="text-white">ภาษาที่ใช้งาน</span>
+                            </div>
+                            <span class="text-gray-300">ไทย (Thai)</span>
+                        </div>
+                        <button onclick="logout()" class="w-full mt-4 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 rounded-lg shadow-lg transition-colors duration-300 flex items-center justify-center">
+                            <i data-lucide="log-out" class="w-5 h-5 inline-block mr-2"></i>
+                            ออกจากระบบ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+<script>
+function getQuizDataForProfile() {
+    // ดึงคะแนนจาก gradebook (localStorage)
+    let unit1 = parseInt(localStorage.getItem('quiz_unit1_score')) || 0;
+    let unit2 = parseInt(localStorage.getItem('quiz_unit2_score')) || 0;
+    let unit3 = parseInt(localStorage.getItem('quiz_unit3_score')) || 0;
+    let date1 = localStorage.getItem('quiz_unit1_date');
+    let date2 = localStorage.getItem('quiz_unit2_date');
+    let date3 = localStorage.getItem('quiz_unit3_date');
+    function getGrade(score) {
+        if (score >= 9) return 'A';
+        if (score >= 8) return 'B+';
+        if (score >= 7) return 'B';
+        if (score >= 6) return 'C+';
+        if (score >= 5) return 'C';
+        if (score >= 4) return 'D';
+        return 'F';
+    }
+    // เตรียมข้อมูลแต่ละยูนิต
+    let units = [
+        { name: 'U1: Introduction & Small Talk', score: unit1, date: date1, grade: getGrade(unit1) },
+        { name: 'U2: Permission & Request', score: unit2, date: date2, grade: getGrade(unit2) },
+        { name: 'U3: Likes & Dislikes', score: unit3, date: date3, grade: getGrade(unit3) }
+    ];
+    let doneUnits = units.filter(u=>u.score>0);
+    let avg = doneUnits.length ? Math.round(doneUnits.reduce((a,b)=>a+b.score,0)/doneUnits.length*10) : 0;
+    return { 
+        total: doneUnits.length, 
+        avg: avg, 
+        units: units
+    };
+}
+function renderProfileGradesTable() {
+    const q = getQuizDataForProfile();
+    document.getElementById('profile-quiz-completed').innerText = q.total;
+    document.getElementById('profile-quiz-avg').innerText = q.avg + "%";
+    const tb = document.getElementById('profile-grade-table-body');
+    tb.innerHTML = '';
+    q.units.forEach(u=>{
+        let dateStr = u.date ? (new Date(u.date)).toLocaleDateString('th-TH', { year:"numeric", month:"short", day:"numeric" }) : "-";
+        tb.innerHTML += `
+            <tr>
+                <td style="text-align:left;">${u.name}</td>
+                <td>${u.score ? u.score + "/10" : "-"}</td>
+                <td>${u.score ? u.grade : "-"}</td>
+                <td>${dateStr}</td>
+            </tr>
+        `;
+    });
+}
+window.onload = function() {
+    loadProfileData();
+    document.getElementById('fileInput').addEventListener('change', handleImageChange);
+    renderProfileGradesTable();
+};
+</script>
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        function eraseCookie(name) {   
+            document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+        function loadProfileData() {
+            const userJson = localStorage.getItem('loggedInUser');
+            if (userJson) {
+                const user = JSON.parse(userJson);
+                // Update Username
+                const usernameElement = document.getElementById('profileUsername');
+                if (usernameElement) {
+                    usernameElement.textContent = user.username;
+                }
+                // Update Email
+                const emailElement = document.getElementById('profileEmail');
+                if (emailElement) {
+                    emailElement.innerHTML = `
+                        <i data-lucide="mail" class="w-4 h-4 inline-block mr-1"></i> 
+                        ${user.email}
+                    `;
+                    lucide.createIcons();
+                }
+                // Update Join Date
+                const joinDateElement = document.getElementById('profileJoinDate');
+                if (joinDateElement && user.joinDate) { 
+                    const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+                    const formattedDate = new Date(user.joinDate).toLocaleDateString('th-TH', dateOptions);
+                    joinDateElement.innerHTML = `
+                        <i data-lucide="calendar" class="w-4 h-4 inline-block mr-2 text-red-400"></i>
+                        เข้าร่วมเมื่อ: ${formattedDate}
+                    `;
+                    lucide.createIcons();
+                }
+                // Load Profile Image
+                if (user.profileImage) {
+                    document.getElementById('profileImage').src = user.profileImage;
+                }
+            } else {
+                alert('ไม่พบข้อมูลผู้ใช้ กรุณาเข้าสู่ระบบอีกครั้ง');
+                window.location.href = 'register.html';
+            }
+        }
+        function handleImageChange(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageUrl = e.target.result; 
+                const profileImage = document.getElementById('profileImage');
+                profileImage.src = imageUrl;
+                let user = JSON.parse(localStorage.getItem('loggedInUser'));
+                if (user) {
+                    user.profileImage = imageUrl; 
+                    localStorage.setItem('loggedInUser', JSON.stringify(user));
+                    updateGlobalUsers(user.email, { profileImage: imageUrl }); 
+                }
+                alert('เปลี่ยนรูปโปรไฟล์สำเร็จ!');
+            };
+            reader.readAsDataURL(file);
+        }
+        function updateGlobalUsers(email, updates) {
+            const allUsersString = localStorage.getItem('allUsers');
+            if (allUsersString) {
+                let allUsers = JSON.parse(allUsersString);
+                if (allUsers[email]) {
+                    allUsers[email] = { ...allUsers[email], ...updates };
+                    localStorage.setItem('allUsers', JSON.stringify(allUsers));
+                }
+            }
+        }
+        function logout() {
+            localStorage.removeItem('loggedInUser');
+            eraseCookie('user_session_token');
+            window.location.href = 'register.html';
+        }
+        fetch('footer.html')
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById('footer-container').innerHTML = html;
+                lucide.createIcons();
+            });
+    </script>
+</body>
+</html>

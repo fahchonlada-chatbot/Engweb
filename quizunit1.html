@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>Unit 1 | Introduction & Small Talk Quiz</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body data-unit="1">
+  <div class="progress-track"><div class="progress-bar"></div></div>
+  <header class="app-header" role="banner">
+    <div class="header-left">
+      <div class="header-icon">
+        <i data-lucide="check-square"></i>
+      </div>
+      <div class="header-title-wrap">
+        <h1 class="header-title">Unit 1: Introduction & Small Talk</h1>
+        <div class="header-sub">แบบทดสอบ 10 ข้อ | เลือกคำตอบที่ถูกต้อง</div>
+      </div>
+    </div>
+    <nav style="display:flex;align-items:center;gap:.65rem;">
+      <a href="homepage.html" class="back-link" aria-label="กลับหน้าหลัก">
+        <i data-lucide="arrow-left"></i> กลับ
+      </a>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="สลับธีม"></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="quiz-intro">
+      ทบทวนเนื้อหาเบื้องต้นเกี่ยวกับการแนะนำตัว การทักทาย และหัวข้อ Small Talk ทั่วไป ก่อนเริ่มทำแบบทดสอบ <br>กรุณาเลือกคำตอบที่ถูกต้องที่สุดในแต่ละข้อ
+    </section>
+
+    <section class="quiz-grid" aria-label="คำถามแบบทดสอบ">
+      <!-- Each quiz-card: data-correct contains the correct option value -->
+      <div class="quiz-card" data-correct="b">
+        <p class="quiz-q">1. "How do you do?" ใช้ในสถานการณ์ใด?</p>
+        <ul class="options">
+          <li class="option"><input id="q1a" type="radio" name="q1" value="a"><label for="q1a" class="option-label">ใช้กับเพื่อนสนิท</label></li>
+            <li class="option"><input id="q1b" type="radio" name="q1" value="b"><label for="q1b" class="option-label">เจอกันครั้งแรกแบบทางการ</label></li>
+            <li class="option"><input id="q1c" type="radio" name="q1" value="c"><label for="q1c" class="option-label">ใช้เวลาบอกงานอดิเรก</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="c">
+        <p class="quiz-q">2. ข้อใดเป็นการแนะนำตัวแบบ <u>ไม่เป็นทางการ (Informal)</u>?</p>
+        <ul class="options">
+          <li class="option"><input id="q2a" type="radio" name="q2" value="a"><label for="q2a" class="option-label">May I introduce myself? My name is Fah.</label></li>
+          <li class="option"><input id="q2b" type="radio" name="q2" value="b"><label for="q2b" class="option-label">Good morning, my name is Fah.</label></li>
+          <li class="option"><input id="q2c" type="radio" name="q2" value="c"><label for="q2c" class="option-label">Hi, I'm Fah. Nice to meet you!</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="b">
+        <p class="quiz-q">3. "It's so hot today." จัดอยู่ในหัวข้อใดของ Small Talk?</p>
+        <ul class="options">
+          <li class="option"><input id="q3a" type="radio" name="q3" value="a"><label for="q3a" class="option-label">ความสนใจและงานอดิเรก</label></li>
+          <li class="option"><input id="q3b" type="radio" name="q3" value="b"><label for="q3b" class="option-label">สภาพอากาศ</label></li>
+          <li class="option"><input id="q3c" type="radio" name="q3" value="c"><label for="q3c" class="option-label">อาชีพ/การศึกษา</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="a">
+        <p class="quiz-q">4. "Where are you from?" ควรตอบอย่างไร?</p>
+        <ul class="options">
+          <li class="option"><input id="q4a" type="radio" name="q4" value="a"><label for="q4a" class="option-label">I'm from Bangkok.</label></li>
+          <li class="option"><input id="q4b" type="radio" name="q4" value="b"><label for="q4b" class="option-label">I'm fine, thank you.</label></li>
+          <li class="option"><input id="q4c" type="radio" name="q4" value="c"><label for="q4c" class="option-label">I'm a student.</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="a">
+        <p class="quiz-q">5. "What do you like to do?" ตัวเลือกใดเหมาะสมที่สุด?</p>
+        <ul class="options">
+          <li class="option"><input id="q5a" type="radio" name="q5" value="a"><label for="q5a" class="option-label">I like watching movies.</label></li>
+          <li class="option"><input id="q5b" type="radio" name="q5" value="b"><label for="q5b" class="option-label">I work in an office.</label></li>
+          <li class="option"><input id="q5c" type="radio" name="q5" value="c"><label for="q5c" class="option-label">Nice weather today!</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="b">
+        <p class="quiz-q">6. "Good morning, my name is Fah." จัดว่าเป็นการแนะนำตัวแบบใด?</p>
+        <ul class="options">
+          <li class="option"><input id="q6a" type="radio" name="q6" value="a"><label for="q6a" class="option-label">Informal</label></li>
+          <li class="option"><input id="q6b" type="radio" name="q6" value="b"><label for="q6b" class="option-label">Formal</label></li>
+          <li class="option"><input id="q6c" type="radio" name="q6" value="c"><label for="q6c" class="option-label">Small Talk</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="a">
+        <p class="quiz-q">7. ข้อใดเป็นประโยค Small Talk เกี่ยวกับการทักทาย?</p>
+        <ul class="options">
+          <li class="option"><input id="q7a" type="radio" name="q7" value="a"><label for="q7a" class="option-label">How have you been?</label></li>
+          <li class="option"><input id="q7b" type="radio" name="q7" value="b"><label for="q7b" class="option-label">I live in Bangkok.</label></li>
+          <li class="option"><input id="q7c" type="radio" name="q7" value="c"><label for="q7c" class="option-label">I'm a student.</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="a">
+        <p class="quiz-q">8. "This is my friend, Anna." ใช้ในกรณีใด?</p>
+        <ul class="options">
+          <li class="option"><input id="q8a" type="radio" name="q8" value="a"><label for="q8a" class="option-label">การแนะนำเพื่อนให้คนอื่นรู้จัก</label></li>
+          <li class="option"><input id="q8b" type="radio" name="q8" value="b"><label for="q8b" class="option-label">การแนะนำตัวเอง</label></li>
+          <li class="option"><input id="q8c" type="radio" name="q8" value="c"><label for="q8c" class="option-label">การบอกอาชีพ</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="b">
+        <p class="quiz-q">9. "I work in an office." จัดอยู่ในหัวข้อใด?</p>
+        <ul class="options">
+          <li class="option"><input id="q9a" type="radio" name="q9" value="a"><label for="q9a" class="option-label">การทักทาย</label></li>
+          <li class="option"><input id="q9b" type="radio" name="q9" value="b"><label for="q9b" class="option-label">อาชีพ/การศึกษา</label></li>
+          <li class="option"><input id="q9c" type="radio" name="q9" value="c"><label for="q9c" class="option-label">งานอดิเรก</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="a">
+        <p class="quiz-q">10. "Have you ever been to Chiang Mai?" ประโยคนี้เกี่ยวข้องกับเรื่องใด?</p>
+        <ul class="options">
+          <li class="option"><input id="q10a" type="radio" name="q10" value="a"><label for="q10a" class="option-label">การเดินทางและท่องเที่ยว</label></li>
+          <li class="option"><input id="q10b" type="radio" name="q10" value="b"><label for="q10b" class="option-label">ความสนใจส่วนตัว</label></li>
+          <li class="option"><input id="q10c" type="radio" name="q10" value="c"><label for="q10c" class="option-label">การทักทายทั่วไป</label></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button id="submitQuiz" class="button" type="button" aria-label="ตรวจคำตอบ">
+        <span>ตรวจคำตอบ</span>
+        <div class="spinner" aria-hidden="true"></div>
+      </button>
+      <button id="restartQuiz" class="button secondary" type="button" aria-label="เริ่มใหม่">
+        เริ่มใหม่
+      </button>
+    </div>
+
+    <div id="resultContainer"></div>
+    <div id="liveRegion" aria-live="polite"></div>
+  </main>
+
+  <canvas id="confettiCanvas"></canvas>
+  <script src="quiz.js"></script>
+  
+</body>
+</html>

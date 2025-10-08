@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - EnglishClassroom</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #0d1117;
+            margin: 0;
+            padding: 0;
+        }
+        .hero-section {
+            background: linear-gradient(120deg, #991b1b 0%, #7f1d1d 100%);
+            overflow: hidden;
+            position: relative;
+        }
+        .wave {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            width: 100%;
+        }
+        .parallax {
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px);}
+            50% { transform: translateY(-15px);}
+        }
+        .feature-card {
+            background: white;
+            border-radius: 1rem;
+            transition: all 0.3s cubic-bezier(.39,.58,.57,1);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        .feature-card.visible {
+            animation: fadeInUp 0.7s forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .course-card {
+            transition: transform 0.4s cubic-bezier(.39,.58,.57,1), box-shadow 0.3s;
+        }
+        .course-card:hover {
+            transform: translateY(-10px) scale(1.03) rotate(-2deg);
+            box-shadow: 0 12px 32px rgba(239,68,68,0.20);
+        }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-gray-900">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 py-3 px-6 flex justify-between items-center z-50 bg-red-600 bg-opacity-95 backdrop-blur-sm shadow-lg">
+        <div class="flex items-center space-x-3">
+            <img src="Logo.JPG" alt="Logo" class="rounded-full shadow-2xl ring-4 w-14 h-14" onerror="this.onerror=null; this.src='https://placehold.co/56x56/dc2626/ffffff?text=Logo';">
+            <a href="#" class="text-xl font-extrabold text-white hover:text-red-200 transition-colors">EnglishClassroom</a>
+        </div>
+        <nav class="flex items-center space-x-6">
+            <a href="course.html" class="nav-item flex flex-col items-center">
+                <div class="bg-white p-3 rounded-lg mb-1 shadow-md">
+                    <i data-lucide="folder" class="w-7 h-7 text-red-600"></i>
+                </div>
+                <span class="text-sm font-semibold text-white">Courses</span>
+            </a>
+            <a href="quiz.html" class="nav-item flex flex-col items-center">
+                <div class="bg-white p-3 rounded-lg mb-1 shadow-md">
+                    <i data-lucide="file-text" class="w-7 h-7 text-red-600"></i>
+                </div>
+                <span class="text-sm font-semibold text-white">Quiz</span>
+            </a>
+            <a href="ebook.html" class="nav-item flex flex-col items-center">
+                <div class="bg-white p-3 rounded-lg mb-1 shadow-md">
+                    <i data-lucide="book-open" class="w-7 h-7 text-red-600"></i>
+                </div>
+                <span class="text-sm font-semibold text-white">E-Books</span>
+            </a>
+            <a href="gradebook.html" class="nav-item flex flex-col items-center">
+                <div class="bg-white p-3 rounded-lg mb-1 shadow-md">
+                    <i data-lucide="bar-chart-3" class="w-7 h-7 text-red-600"></i>
+                </div>
+                <span class="text-sm font-semibold text-white">Gradebook</span>
+            </a>
+        </nav>
+        <div class="flex items-center space-x-2">
+            <a href="Profile.html" class="flex items-center bg-white px-4 py-2 rounded-full hover:bg-gray-100 transition-colors shadow-md">
+                <i data-lucide="user" class="w-6 h-6 text-red-600 mr-2"></i>
+                <span class="text-sm font-medium text-gray-800">Profile</span>
+            </a>
+        </div>
+    </header>
+    <main class="pt-24">
+        <!-- Hero Section + Parallax -->
+        <section class="hero-section py-16 px-6 relative" style="z-index:1;">
+            <div class="absolute left-0 top-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=1200&q=80')] opacity-20 parallax"></div>
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="bg-gradient-to-br from-red-800 to-red-900 rounded-3xl p-12 shadow-2xl flex flex-col md:flex-row items-center justify-between">
+                    <div class="flex-1">
+                        <div class="bg-blue-900 text-white px-6 py-2 rounded-full inline-block mb-6 floating">
+                            <h2 class="text-lg font-bold">คอร์สแนะนำสำหรับผู้เริ่มต้น</h2>
+                        </div>
+                        <div class="bg-gray-100 rounded-2xl p-8 shadow-xl">
+                            <div class="bg-white rounded-xl p-6 mb-4 shadow flex flex-col gap-2">
+                                <h3 class="text-2xl font-bold text-gray-900">English Classroom</h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    เหมาะสำหรับผู้ไม่มีพื้นฐานภาษาอังกฤษหรือมีน้อยมาก 
+                                    เรียนรู้การออกเสียง ไวยากรณ์พื้นฐาน <br>และการสนทนาในชีวิตประจำวัน
+                                    สอนโดยครูไทยและเจ้าของภาษา พร้อมกิจกรรมสนุก ๆ <br>และแบบฝึกหัดที่เข้าใจง่าย
+                                    ฝึกฟัง-พูด-อ่าน-เขียน ครบทุกทักษะ เตรียมความพร้อมสู่ระดับที่สูงขึ้น
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-4 mb-4">
+                                <div class="bg-blue-100 text-blue-900 px-4 py-1 rounded-xl text-sm inline-block">เน้นปูพื้นฐาน</div>
+                                <div class="bg-green-100 text-green-900 px-4 py-1 rounded-xl text-sm inline-block">เรียนสนุก เข้าใจง่าย</div>
+                                <div class="bg-pink-100 text-pink-900 px-4 py-1 rounded-xl text-sm inline-block">ฝึกครบทุกทักษะ</div>
+                            </div>
+                            <a href="course.html" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-all shadow-lg block w-max mx-auto mt-6">
+                                ดูคอร์สเรียน
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ml-0 md:ml-8 mt-8 md:mt-0">
+                        <div class="bg-white rounded-3xl p-6 shadow-2xl course-card floating">
+                            <img src="Logo.JPG" alt="English Basic" class="rounded-2xl w-72 h-72 object-cover">
+                            <p class="text-center mt-4 font-bold text-gray-800"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- SVG Decorative Wave -->
+            <svg class="wave" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#0d1117" fill-opacity="1" d="M0,64L60,69.3C120,75,240,85,360,106.7C480,128,600,160,720,160C840,160,960,128,1080,122.7C1200,117,1320,139,1380,149.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+            </svg>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-16 px-6 bg-gradient-to-br from-red-900 to-red-800">
+            <div class="max-w-7xl mx-auto">
+                <div class="bg-blue-900 text-white px-8 py-3 rounded-full inline-block mb-12 mx-auto block text-center floating">
+                    <h2 class="text-2xl font-bold">จุดเด่นของ EnglishClassroom</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Feature cards (ทรงสี่เหลี่ยมมุมมน พร้อมกล่องข้อความ) -->
+                    <div class="feature-card p-8 text-center">
+                        <div class="w-32 h-32 mx-auto mb-6 rounded-2xl border-4 border-blue-900 flex items-center justify-center floating">
+                            <img src="Pic1.JPG" alt="ครูไทย" class="w-full h-full object-cover rounded-2xl">
+                        </div>
+                        <div class="bg-gray-100 rounded-xl p-4 shadow mb-2">
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">หลักสูตรเข้าใจง่าย</h3>
+                            <p class="text-gray-700 leading-relaxed text-sm">
+                                ออกแบบโดยครูไทย เข้าใจปัญหาการเรียน<br>ภาษาอังกฤษของคนไทย<br>
+                                มีตัวอย่างและเทคนิคที่เข้าใจง่ายและใช้ได้จริง
+                            </p>
+                        </div>
+                    </div>
+                    <div class="feature-card p-8 text-center">
+                        <div class="w-32 h-32 mx-auto mb-6 rounded-2xl border-4 border-blue-900 flex items-center justify-center floating" style="animation-delay:0.2s;">
+                            <img src="Pic2.JPG" alt="เจ้าของภาษา" class="w-full h-full object-cover rounded-2xl">
+                        </div>
+                        <div class="bg-gray-100 rounded-xl p-4 shadow mb-2">
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">เรียนกับเจ้าของภาษา</h3>
+                            <p class="text-gray-700 leading-relaxed text-sm">
+                                สอนสนทนาและฝึกสำเนียงกับคุณครูเจ้าของภาษา<br>
+                                ฝึกฟังและพูดจริง เพิ่มความมั่นใจ
+                            </p>
+                        </div>
+                    </div>
+                    <div class="feature-card p-8 text-center">
+                        <div class="w-32 h-32 mx-auto mb-6 rounded-2xl border-4 border-blue-900 flex items-center justify-center floating" style="animation-delay:0.4s;">
+                            <img src="Pic3.JPG" alt="สนทนา" class="w-full h-full object-cover rounded-2xl">
+                        </div>
+                        <div class="bg-gray-100 rounded-xl p-4 shadow mb-2">
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">ไม่มีพื้นฐานก็เรียนได้</h3>
+                            <p class="text-gray-700 leading-relaxed text-sm">
+                                ไม่เคยเรียนภาษาอังกฤษมาก่อนก็เริ่มได้<br>
+                                มีวิดีโอและแบบฝึกหัดที่อธิบายละเอียด <br>พร้อมแนะแนวแต่ละขั้นตอน
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- จุดเด่นเพิ่มเติม -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+                    <div class="feature-card p-8 text-center">
+                        <div class="w-24 h-24 mx-auto mb-4 rounded-2xl border-4 border-blue-900 flex items-center justify-center floating">
+                            <i data-lucide="clock" class="w-12 h-12 text-blue-700"></i>
+                        </div>
+                        <div class="bg-gray-100 rounded-xl p-4 shadow">
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">เรียนได้ทุกที่ทุกเวลา</h3>
+                            <p class="text-gray-700 text-sm">
+                                เรียนออนไลน์ผ่านวิดีโอและบทเรียนอินเตอร์แอคทีฟ เปิดเรียนซ้ำได้ไม่จำกัด<br>
+                                เหมาะกับทุกไลฟ์สไตล์
+                            </p>
+                        </div>
+                    </div>
+                    <div class="feature-card p-8 text-center">
+                        <div class="w-24 h-24 mx-auto mb-4 rounded-2xl border-4 border-yellow-400 flex items-center justify-center floating">
+                            <i data-lucide="award" class="w-12 h-12 text-yellow-500"></i>
+                        </div>
+                        <div class="bg-gray-100 rounded-xl p-4 shadow">
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">ได้รับใบประกาศนียบัตร</h3>
+                            <p class="text-gray-700 text-sm">
+                                เมื่อเรียนจบหลักสูตร รับใบประกาศนียบัตรออนไลน์<br>
+                                เพิ่มโอกาสในสายงานหรือศึกษาต่อ
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Details Section -->
+        <section id="courses" class="py-16 px-6 bg-gradient-to-br from-red-800 to-red-900">
+            <div class="max-w-5xl mx-auto">
+                <div class="bg-white rounded-3xl p-12 shadow-2xl flex flex-col md:flex-row items-start">
+                    <div class="bg-red-600 p-6 rounded-full mr-0 md:mr-8 mb-8 md:mb-0 floating">
+                        <i data-lucide="book-open" class="w-16 h-16 text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="bg-gray-50 rounded-xl p-6 shadow mb-4">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">รายละเอียดคอร์ส English Basic</h2>
+                            <ul class="list-disc list-inside text-gray-700 leading-relaxed mb-6 text-sm">
+                       <li>เหมาะสำหรับผู้เริ่มต้นและผู้ที่ต้องการปูพื้นฐานภาษาอังกฤษอย่างมั่นคง</li>
+                        <li>เรียนได้ทุกที่ทุกเวลา ตลอด 24 ชั่วโมง พร้อมแบบฝึกหัดครบทุกทักษะ</li>
+                    <li>เน้นการฟัง พูด อ่าน เขียน และการนำไปใช้จริงในชีวิตประจำวัน</li>
+                    <li>เรียนกับครูผู้เชี่ยวชาญ ทั้งชาวไทยและเจ้าของภาษาในคอร์สเดียว</li>
+                    <li>มีแบบทดสอบประเมินความเข้าใจในแต่ละบทเรียน</li>
+                    <li>เนื้อหาทันสมัย เข้าใจง่าย พร้อมอัปเดตบทเรียนใหม่อย่างต่อเนื่อง</li>
+                            </ul>
+                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    <script>
+        // Lucide icons
+        lucide.createIcons();
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Fade-in Feature Cards on Scroll (Intersection Observer)
+        const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.feature-card').forEach(card => observer.observe(card));
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', function() {
+            const bg = document.querySelector('.parallax');
+            if(bg) {
+                let offset = window.scrollY * 0.3;
+                bg.style.transform = `translateY(${offset}px)`;
+            }
+        });
+
+        // Load footer
+        fetch('footer.html')
+          .then(res => res.text())
+          .then(html => {
+            document.getElementById('footer-container').innerHTML = html;
+            if (window.lucide) lucide.createIcons();
+          });
+    </script>
+</body>
+</html>

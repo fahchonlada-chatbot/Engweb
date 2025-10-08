@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradebook - คะแนนสอบ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background: linear-gradient(120deg, #1a1f2e 0%, #0d1117 100%);
+            min-height: 100vh;
+        }
+        /* Glass effect for cards */
+        .glass {
+            background: rgba(255,255,255,0.09);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+            backdrop-filter: blur(12px);
+            border-radius: 1.2rem;
+            border: 1.2px solid rgba(255,255,255,0.18);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass::before {
+            content: "";
+            position: absolute;
+            left: -40px; top: -40px;
+            width: 110px; height: 110px;
+            background: radial-gradient(circle,rgba(220,38,38,0.16) 0%, rgba(255,255,255,0.01) 80%);
+            z-index: 0;
+        }
+        .stat-card { transition: all 0.26s cubic-bezier(.4,2,.6,1); }
+        .stat-card:hover { transform: scale(1.03) translateY(-6px); box-shadow: 0 16px 54px #fbbf2430; }
+        .score-badge { animation: pulse 2s infinite; box-shadow: 0 2px 18px #eab308cc; }
+        @keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.09);} }
+        .grade-table th, .grade-table td { color: #fff !important; }
+        .grade-row { transition: background 0.22s, transform 0.2s; }
+        .grade-row:hover { background: rgba(220, 38, 38, 0.12) !important; transform:scale(1.007); }
+        .chart-container { background:rgba(255,255,255,0.06); border-radius:1.5rem; box-shadow:0 8px 32px #0d1117a0; }
+        .chart-flex { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.2rem; }
+        .chart-legend { min-width: 168px; margin-top:16px; z-index:2; }
+        .legend-color { width:18px; height:13px; border-radius:3px; margin-right:12px; display:inline-block; }
+        .color-u1 { background: linear-gradient(90deg,#dc2626 70%,#fbbf24 100%);}
+        .color-u2 { background: linear-gradient(90deg,#10b981 70%,#22d3ee 100%);}
+        .color-u3 { background: linear-gradient(90deg,#3b82f6 70%,#a21caf 100%);}
+        .confetti { position:fixed; pointer-events:none; z-index:9999; top:0; left:0; width:100vw; height:100vh; }
+        .confetti-piece { position:absolute; width:10px; height:18px; opacity:.85; border-radius:3px; will-change:transform,opacity; }
+        /* Responsive */
+        @media (max-width:1024px) {
+            .chart-flex { flex-direction:column; }
+        }
+        @media (max-width:640px) {
+            .glass { padding:1.2rem !important; }
+            .chart-legend { min-width: 120px; font-size:13px;}
+            .stat-card { padding:1.3rem !important; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Confetti -->
+    <div class="confetti" id="confetti"></div>
+    <!-- Header -->
+    <header class="flex justify-between items-center px-4 py-3 bg-red-700 bg-opacity-95 backdrop-blur-md shadow-2xl animate__animated animate__fadeInDown">
+        <div class="flex items-center space-x-2">
+            <img src="Logo.JPG" alt="Logo" class="w-12 h-12 rounded-full ring-2 ring-white shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/48x48/dc2626/fff?text=Logo';">
+            <a href="homepage.html" class="text-2xl font-bold text-white hover:text-yellow-300 tracking-wide">EnglishClassroom</a>
+        </div>
+        <nav class="flex items-center space-x-2 sm:space-x-4">
+            <a href="course.html" class="flex flex-col items-center nav-item group">
+                <div class="bg-white p-2 sm:p-3 rounded-lg mb-1 shadow">
+                    <i data-lucide="folder" class="w-6 h-6 text-red-600"></i>
+                </div>
+                <span class="text-xs sm:text-sm text-white font-semibold">Courses</span>
+            </a>
+            <a href="quiz.html" class="flex flex-col items-center nav-item group">
+                <div class="bg-white p-2 sm:p-3 rounded-lg mb-1 shadow">
+                    <i data-lucide="file-text" class="w-6 h-6 text-red-600"></i>
+                </div>
+                <span class="text-xs sm:text-sm text-white font-semibold">Quiz</span>
+            </a>
+            <a href="ebook.html" class="flex flex-col items-center nav-item group">
+                <div class="bg-white p-2 sm:p-3 rounded-lg mb-1 shadow">
+                    <i data-lucide="book-open" class="w-6 h-6 text-red-600"></i>
+                </div>
+                <span class="text-xs sm:text-sm text-white font-semibold">E-Books</span>
+            </a>
+            <a href="gradebook.html" class="flex flex-col items-center nav-item group">
+                <div class="bg-red-800 p-2 sm:p-3 rounded-lg mb-1 shadow ring-2 ring-white">
+                    <i data-lucide="bar-chart-3" class="w-6 h-6 text-white"></i>
+                </div>
+                <span class="text-xs sm:text-sm text-white font-semibold">Gradebook</span>
+            </a>
+        </nav>
+        <a href="Profile.html" class="flex items-center bg-white px-3 py-1.5 rounded-full hover:bg-gray-100 shadow transition">
+            <i data-lucide="user" class="w-5 h-5 text-red-700 mr-2"></i>
+            <span class="text-sm font-medium text-gray-800 hidden sm:block">Profile</span>
+        </a>
+    </header>
+    <!-- Main -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <div class="text-center mb-12 animate__animated animate__fadeInUp">
+            <h1 class="text-4xl sm:text-5xl font-bold text-white mb-3 tracking-wide drop-shadow-lg">
+                <i data-lucide="trophy" class="inline w-11 h-11 text-yellow-400 mr-2"></i>
+                สมุดคะแนน
+            </h1>
+            <div class="text-gray-300 text-base sm:text-lg">ติดตามผลการเรียนและคะแนนของคุณ</div>
+        </div>
+        <!-- Stats -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mb-10">
+            <div class="glass stat-card p-4 sm:p-6 flex flex-col items-center">
+                <div class="bg-blue-500 bg-opacity-20 p-3 rounded-xl mb-3">
+                    <i data-lucide="list-checks" class="w-8 h-8 text-blue-400"></i>
+                </div>
+                <span class="text-2xl sm:text-3xl font-extrabold text-white counter" data-id="quizzes">3</span>
+                <span class="text-gray-200 text-xs mt-2">จำนวนแบบทดสอบ</span>
+            </div>
+            <div class="glass stat-card p-4 sm:p-6 flex flex-col items-center">
+                <div class="bg-green-500 bg-opacity-20 p-3 rounded-xl mb-3">
+                    <i data-lucide="target" class="w-8 h-8 text-green-400"></i>
+                </div>
+                <span class="text-2xl sm:text-3xl font-extrabold text-white counter" data-id="avg">0.0</span>
+                <span class="text-gray-200 text-xs mt-2">คะแนนเฉลี่ย</span>
+            </div>
+            <div class="glass stat-card p-4 sm:p-6 flex flex-col items-center">
+                <div class="bg-yellow-500 bg-opacity-20 p-3 rounded-xl mb-3">
+                    <i data-lucide="star" class="w-8 h-8 text-yellow-400"></i>
+                </div>
+                <span class="text-2xl sm:text-3xl font-extrabold text-white counter" data-id="max">0</span>
+                <span class="text-gray-200 text-xs mt-2">คะแนนสูงสุด</span>
+            </div>
+            <div class="glass stat-card p-4 sm:p-6 flex flex-col items-center">
+                <div class="bg-red-500 bg-opacity-20 p-3 rounded-xl mb-3">
+                    <i data-lucide="award" class="w-8 h-8 text-red-400"></i>
+                </div>
+                <span class="text-2xl sm:text-3xl font-extrabold text-white score-badge counter" data-id="grade">F</span>
+                <span class="text-gray-200 text-xs mt-2">เกรดรวม</span>
+            </div>
+        </div>
+        <!-- Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+            <div class="chart-container glass p-4 sm:p-6 animate__animated animate__fadeInUp">
+                <div class="chart-flex">
+                    <div class="chart-legend">
+                        <h3 class="text-lg font-bold text-white mb-3 flex items-center">
+                            <i data-lucide="bar-chart-3" class="w-5 h-5 text-red-400 mr-2"></i> คะแนนแต่ละยูนิต (Bar)
+                        </h3>
+                        <div class="flex flex-col gap-2">
+                            <span><span class="legend-color color-u1"></span> <span class="text-white">U1: Introduction & Small Talk</span></span>
+                            <span><span class="legend-color color-u2"></span> <span class="text-white">U2: Permission & Request</span></span>
+                            <span><span class="legend-color color-u3"></span> <span class="text-white">U3: Likes & Dislikes</span></span>
+                        </div>
+                    </div>
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-container glass p-4 sm:p-6 animate__animated animate__fadeInUp">
+                <div class="chart-flex">
+                    <div class="chart-legend">
+                        <h3 class="text-lg font-bold text-white mb-3 flex items-center">
+                            <i data-lucide="pie-chart" class="w-5 h-5 text-red-400 mr-2"></i> สัดส่วนคะแนนแต่ละยูนิต (Pie)
+                        </h3>
+                        <div class="flex flex-col gap-2">
+                            <span><span class="legend-color color-u1"></span> <span class="text-white">U1: Introduction & Small Talk</span></span>
+                            <span><span class="legend-color color-u2"></span> <span class="text-white">U2: Permission & Request</span></span>
+                            <span><span class="legend-color color-u3"></span> <span class="text-white">U3: Likes & Dislikes</span></span>
+                        </div>
+                    </div>
+                    <canvas id="distributionChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- Grade Table -->
+        <div class="glass grade-table rounded-2xl border border-gray-700 overflow-hidden animate__animated animate__fadeInUp">
+            <div class="bg-red-600 bg-opacity-25 p-5 border-b border-gray-700">
+                <h2 class="text-xl sm:text-2xl font-bold text-white flex items-center">
+                    <i data-lucide="clipboard-list" class="w-7 h-7 text-red-400 mr-2"></i>
+                    รายละเอียดคะแนน
+                </h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-800 bg-opacity-50">
+                        <tr>
+                            <th class="px-5 py-4 text-left text-xs font-semibold">#</th>
+                            <th class="px-5 py-4 text-left text-xs font-semibold">ชื่อแบบทดสอบ</th>
+                            <th class="px-5 py-4 text-center text-xs font-semibold">วันที่ทำ</th>
+                            <th class="px-5 py-4 text-center text-xs font-semibold">คะแนน</th>
+                            <th class="px-5 py-4 text-center text-xs font-semibold">เกรด</th>
+                            <th class="px-5 py-4 text-center text-xs font-semibold">สถานะ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="gradesTableBody" class="divide-y divide-gray-700">
+                        <!-- Rows populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    <script>
+    // Confetti
+    function launchConfettiIfPerfect() {
+        const avg = parseFloat(document.querySelector('[data-id="avg"]').innerText);
+        if(avg === 10) showConfetti();
+    }
+    function showConfetti() {
+        const colors = ['#dc2626','#fbbf24','#3b82f6','#10b981','#eab308','#a21caf','#fff'];
+        const confetti = document.getElementById('confetti');
+        confetti.innerHTML = '';
+        for(let i=0;i<60;i++){
+            let el = document.createElement('div');
+            el.className = 'confetti-piece';
+            el.style.background = colors[Math.floor(Math.random()*colors.length)];
+            el.style.left = Math.random()*100+'vw';
+            el.style.top = (Math.random()*-30)+'vh';
+            el.style.opacity = (0.7+Math.random()*0.3).toFixed(2);
+            el.style.transform = `rotate(${Math.random()*360}deg)`;
+            el.style.animation = `fall ${(2+Math.random()*2).toFixed(2)}s ${Math.random()}s linear forwards`;
+            confetti.appendChild(el);
+        }
+        setTimeout(()=>confetti.innerHTML='',3400);
+    }
+    const confettiAnim = `
+    @keyframes fall {
+        to {
+            top: 120vh;
+            transform: rotate(720deg);
+            opacity: 0.15;
+        }
+    }`;
+    document.head.insertAdjacentHTML('beforeend', `<style>${confettiAnim}</style>`);
+
+    // Data & Render
+    function getQuizScores() {
+        return [
+            { unit: 1, title: "Unit 1: Introduction & Small Talk", key: "quiz_unit1_score", dateKey: "quiz_unit1_date" },
+            { unit: 2, title: "Unit 2: Permission & Request", key: "quiz_unit2_score", dateKey: "quiz_unit2_date" },
+            { unit: 3, title: "Unit 3: Likes & Dislikes", key: "quiz_unit3_score", dateKey: "quiz_unit3_date" }
+        ];
+    }
+    function getGrade(score) {
+        if (score >= 9) return 'A';
+        if (score >= 8) return 'B+';
+        if (score >= 7) return 'B';
+        if (score >= 6) return 'C+';
+        if (score >= 5) return 'C';
+        if (score >= 4) return 'D';
+        return 'F';
+    }
+    function renderGradeTable() {
+        const quizScores = getQuizScores();
+        const table = document.getElementById('gradesTableBody');
+        let sum = 0, count = 0, maxScore = 0;
+        table.innerHTML = '';
+        quizScores.forEach((q, idx) => {
+            let score = localStorage.getItem(q.key);
+            let date = localStorage.getItem(q.dateKey);
+            score = score !== null ? parseInt(score) : '-';
+            let grade = (typeof score === 'number' && !isNaN(score)) ? getGrade(score) : '-';
+            let done = (typeof score === 'number' && !isNaN(score)) ?
+                '<span class="animate__animated animate__bounceIn text-green-400">✔️</span>' :
+                '<span class="animate__animated animate__fadeIn text-gray-400">❌</span>';
+            let dateStr = date ? new Date(date).toLocaleDateString('th-TH', { year: "numeric", month: "short", day: "numeric" }) : "-";
+            if (typeof score === 'number' && !isNaN(score)) {
+                sum += score;
+                count++;
+                if (score > maxScore) maxScore = score;
+            }
+            table.innerHTML += `
+                <tr class="grade-row">
+                    <td class="px-5 py-3">${idx+1}</td>
+                    <td class="px-5 py-3">${q.title}</td>
+                    <td class="px-5 py-3 text-center">${dateStr}</td>
+                    <td class="px-5 py-3 text-center">${score}/10</td>
+                    <td class="px-5 py-3 text-center">${grade}</td>
+                    <td class="px-5 py-3 text-center">${done}</td>
+                </tr>
+            `;
+        });
+        // Animate numbers
+        animateCounter(document.querySelector('[data-id="quizzes"]'), quizScores.length, 0, 1);
+        animateCounter(document.querySelector('[data-id="avg"]'), count ? (sum/count).toFixed(2) : 0.0, 0, 1, 2);
+        animateCounter(document.querySelector('[data-id="max"]'), maxScore, 0, 1);
+        document.querySelector('[data-id="grade"]').innerText = getGrade(count ? (sum/count) : 0);
+        setTimeout(launchConfettiIfPerfect, 400);
+    }
+    function animateCounter(el, end, start=0, duration=1, decimal=0) {
+        end = parseFloat(end);
+        let frame = 0, totalFrames = duration*60, diff = end-start;
+        if (decimal>0) start = parseFloat(start);
+        function tick() {
+            frame++;
+            let progress = frame/totalFrames;
+            let val = start + diff*progress;
+            if (decimal>0) val = val.toFixed(decimal);
+            else val = Math.round(val);
+            el.innerText = progress>=1?end:val;
+            if(progress<1) requestAnimationFrame(tick);
+        }
+        tick();
+    }
+    function renderCharts() {
+        const quizScores = getQuizScores();
+        const labels = quizScores.map(q => q.title.replace('Unit ', 'U'));
+        const scores = quizScores.map(q => {
+            let s = localStorage.getItem(q.key);
+            return s !== null ? parseInt(s) : 0;
+        });
+        // Remove old chart
+        let barOld = document.getElementById('trendChart');
+        let barParent = barOld.parentNode;
+        barOld.remove();
+        barParent.innerHTML += `<canvas id="trendChart"></canvas>`;
+        let pieOld = document.getElementById('distributionChart');
+        let pieParent = pieOld.parentNode;
+        pieOld.remove();
+        pieParent.innerHTML += `<canvas id="distributionChart"></canvas>`;
+        // Bar Chart
+        const barCtx = document.getElementById('trendChart').getContext('2d');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'คะแนน',
+                    data: scores,
+                    backgroundColor: ['#dc2626','#10b981','#3b82f6'],
+                    borderColor: ['#dc2626','#10b981','#3b82f6'],
+                    borderWidth: 2,
+                    borderRadius: 10,
+                    maxBarThickness: 44,
+                    hoverBackgroundColor: ['#fbbf24','#22d3ee','#a21caf'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        enabled: true,
+                        backgroundColor: '#1a1f2e',
+                        titleColor: '#fbbf24',
+                        bodyColor: '#fff',
+                        borderColor: '#dc2626',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: ctx => ` คะแนน: ${ctx.parsed.y}/10`
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: { color: '#fff', stepSize: 1, font: {weight:'bold'} },
+                        grid: { color: 'rgba(255,255,255,0.11)' }
+                    },
+                    x: {
+                        ticks: { color: '#fff', font: {weight:'bold'} },
+                        grid: { color: 'rgba(255,255,255,0.04)' }
+                    }
+                },
+                animation: { duration: 900, easing: 'easeOutBack' }
+            }
+        });
+        // Pie Chart
+        const pieCtx = document.getElementById('distributionChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: scores,
+                    backgroundColor: ['#dc2626','#10b981','#3b82f6'],
+                    borderColor: '#222',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#1a1f2e',
+                        bodyColor: '#fff'
+                    }
+                },
+                responsive: true,
+                animation: { animateRotate: true, animateScale: true, duration: 1000 }
+            }
+        });
+    }
+    window.onload = function() {
+        renderGradeTable();
+        renderCharts();
+        lucide.createIcons();
+    };
+    // Footer
+    fetch('footer.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('footer-container').innerHTML = html;
+        if (window.lucide) lucide.createIcons();
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>Unit 3 | Likes & Dislikes Quiz</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body data-unit="3">
+  <div class="progress-track"><div class="progress-bar"></div></div>
+  <header class="app-header">
+    <div class="header-left">
+      <div class="header-icon"><i data-lucide="check-square"></i></div>
+      <div class="header-title-wrap">
+        <h1 class="header-title">Unit 3: Likes & Dislikes</h1>
+        <div class="header-sub">แบบทดสอบเรื่องการแสดงความชอบ / ไม่ชอบ</div>
+      </div>
+    </div>
+    <nav style="display:flex;align-items:center;gap:.65rem;">
+      <a href="homepage.html" class="back-link"><i data-lucide="arrow-left"></i> กลับ</a>
+      <button id="themeToggle" class="theme-toggle" type="button"></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="quiz-intro">
+      โฟกัสคำศัพท์และโครงสร้างประโยคสำหรับการบอก / ถามความชอบไม่ชอบ ทั้งในรูปแบบ Formal / Neutral / Informal
+    </section>
+
+    <section class="quiz-grid">
+      <div class="quiz-card" data-correct="a">
+        <p class="quiz-q">1. คำว่า “Likes and Dislikes” หมายถึงอะไร?</p>
+        <ul class="options">
+          <li class="option"><input id="u3q1a" name="q1" type="radio" value="a"><label for="u3q1a" class="option-label">ความชอบและความไม่ชอบ</label></li>
+          <li class="option"><input id="u3q1b" name="q1" type="radio" value="b"><label for="u3q1b" class="option-label">ความรู้สึกและอารมณ์</label></li>
+          <li class="option"><input id="u3q1c" name="q1" type="radio" value="c"><label for="u3q1c" class="option-label">การอนุญาตและการร้องขอ</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="b">
+        <p class="quiz-q">2. ข้อใดเป็นประโยคที่ใช้บอก “ความชอบ” แบบไม่เป็นทางการ (Informal)?</p>
+        <ul class="options">
+          <li class="option"><input id="u3q2a" name="q2" type="radio" value="a"><label for="u3q2a" class="option-label">I enjoy reading books.</label></li>
+          <li class="option"><input id="u3q2b" name="q2" type="radio" value="b"><label for="u3q2b" class="option-label">I like pizza.</label></li>
+          <li class="option"><input id="u3q2c" name="q2" type="radio" value="c"><label for="u3q2c" class="option-label">I appreciate your help.</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="c">
+        <p class="quiz-q">3. ข้อใดเป็นประโยคที่ใช้ใน “รูปแบบทางการ (Formal)”</p>
+        <ul class="options">
+          <li class="option"><input id="u3q3a" name="q3" type="radio" value="a"><label for="u3q3a" class="option-label">I’m into K-pop.</label></li>
+          <li class="option"><input id="u3q3b" name="q3" type="radio" value="b"><label for="u3q3b" class="option-label">I love cats.</label></li>
+          <li class="option"><input id="u3q3c" name="q3" type="radio" value="c"><label for="u3q3c" class="option-label">I prefer tea to coffee.</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="a">
+        <p class="quiz-q">4. “I don’t like waking up early.” หมายความว่าอะไร?</p>
+        <ul class="options">
+          <li class="option"><input id="u3q4a" name="q4" type="radio" value="a"><label for="u3q4a" class="option-label">ฉันไม่ชอบตื่นเช้า</label></li>
+          <li class="option"><input id="u3q4b" name="q4" type="radio" value="b"><label for="u3q4b" class="option-label">ฉันชอบไปเที่ยวตอนเช้า</label></li>
+          <li class="option"><input id="u3q4c" name="q4" type="radio" value="c"><label for="u3q4c" class="option-label">ฉันมักจะตื่นเช้า</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="a">
+        <p class="quiz-q">5. ประโยคใดแสดง “ความรู้สึกชอบอย่างแรง”?</p>
+        <ul class="options">
+          <li class="option"><input id="u3q5a" name="q5" type="radio" value="a"><label for="u3q5a" class="option-label">I love watching movies.</label></li>
+          <li class="option"><input id="u3q5b" name="q5" type="radio" value="b"><label for="u3q5b" class="option-label">I like watching movies.</label></li>
+          <li class="option"><input id="u3q5c" name="q5" type="radio" value="c"><label for="u3q5c" class="option-label">I enjoy watching movies.</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="b">
+        <p class="quiz-q">6. หากต้องการพูดอย่างสุภาพว่า “ฉันชอบดนตรีคลาสสิก” ควรใช้ประโยคใด?</p>
+        <ul class="options">
+          <li class="option"><input id="u3q6a" name="q6" type="radio" value="a"><label for="u3q6a" class="option-label">I’m into classical music.</label></li>
+          <li class="option"><input id="u3q6b" name="q6" type="radio" value="b"><label for="u3q6b" class="option-label">I appreciate classical music.</label></li>
+          <li class="option"><input id="u3q6c" name="q6" type="radio" value="c"><label for="u3q6c" class="option-label">I love classical music.</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="a">
+        <p class="quiz-q">7. ข้อใดเป็นประโยคที่ใช้เปรียบเทียบความชอบ?</p>
+        <ul class="options">
+          <li class="option"><input id="u3q7a" name="q7" type="radio" value="a"><label for="u3q7a" class="option-label">I prefer coffee to tea.</label></li>
+          <li class="option"><input id="u3q7b" name="q7" type="radio" value="b"><label for="u3q7b" class="option-label">I like coffee.</label></li>
+          <li class="option"><input id="u3q7c" name="q7" type="radio" value="c"><label for="u3q7c" class="option-label">I’m into tea.</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="a">
+        <p class="quiz-q">8. คำว่า “I’m not into football.” มีความหมายว่าอย่างไร?</p>
+        <ul class="options">
+          <li class="option"><input id="u3q8a" name="q8" type="radio" value="a"><label for="u3q8a" class="option-label">ฉันไม่ชอบฟุตบอล</label></li>
+          <li class="option"><input id="u3q8b" name="q8" type="radio" value="b"><label for="u3q8b" class="option-label">ฉันชอบฟุตบอลมาก</label></li>
+          <li class="option"><input id="u3q8c" name="q8" type="radio" value="c"><label for="u3q8c" class="option-label">ฉันดูฟุตบอลบ่อย</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="b">
+        <p class="quiz-q">9. หากต้องการถามเพื่อนว่า “คุณชอบอะไร?” ควรถามว่าอย่างไร?</p>
+        <ul class="options">
+          <li class="option"><input id="u3q9a" name="q9" type="radio" value="a"><label for="u3q9a" class="option-label">What are you interested in?</label></li>
+          <li class="option"><input id="u3q9b" name="q9" type="radio" value="b"><label for="u3q9b" class="option-label">What do you like?</label></li>
+          <li class="option"><input id="u3q9c" name="q9" type="radio" value="c"><label for="u3q9c" class="option-label">How do you feel about it?</label></li>
+        </ul>
+      </div>
+
+      <div class="quiz-card" data-correct="c">
+        <p class="quiz-q">10. ประโยค “I enjoy reading English novels.” เป็นประโยคประเภทใด?</p>
+        <ul class="options">
+          <li class="option"><input id="u3q10a" name="q10" type="radio" value="a"><label for="u3q10a" class="option-label">Informal</label></li>
+          <li class="option"><input id="u3q10b" name="q10" type="radio" value="b"><label for="u3q10b" class="option-label">Neutral</label></li>
+          <li class="option"><input id="u3q10c" name="q10" type="radio" value="c"><label for="u3q10c" class="option-label">Formal</label></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button id="submitQuiz" class="button" type="button">ตรวจคำตอบ<div class="spinner"></div></button>
+      <button id="restartQuiz" class="button secondary" type="button">เริ่มใหม่</button>
+    </div>
+
+    <div id="resultContainer"></div>
+    <div id="liveRegion" aria-live="polite"></div>
+  </main>
+
+  <canvas id="confettiCanvas"></canvas>
+  <script src="quiz.js"></script>
+</body>
+</html>

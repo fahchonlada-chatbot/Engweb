@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>E-Books | EnglishClassroom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --brand-red: #dc2626;
+      --brand-red-dark: #991b1b;
+      --brand-bg-dark: #0d1117;
+      --card-bg: linear-gradient(145deg,#1f2937 65%,#991b1b 140%);
+      --gradient-accent: linear-gradient(100deg,#fff 15%,#fca5a5 55%,#991b1b 100%);
+      --radius-xl: 1.25rem;
+      --elevate: 0 8px 32px -6px rgba(220,38,38,0.35),0 2px 10px rgba(0,0,0,0.45);
+      --elevate-hover: 0 18px 55px -10px rgba(220,38,38,0.55),0 4px 18px rgba(0,0,0,0.55);
+    }
+    body {
+      font-family: 'Prompt', system-ui, sans-serif;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 18% 22%,rgba(220,38,38,0.35),transparent 55%),
+        radial-gradient(circle at 82% 78%,rgba(153,27,27,0.28),transparent 60%),
+        linear-gradient(130deg,var(--brand-bg-dark) 0%,var(--brand-red-dark) 115%);
+      color: #f3f4f6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+    .site-header {
+      backdrop-filter: blur(14px);
+      background: linear-gradient(95deg,rgba(153,27,27,0.9),rgba(220,38,38,0.82));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 6px 20px -6px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.08);
+    }
+    .nav-item { transition: all .35s cubic-bezier(.39,.58,.57,1); transform-origin: center; }
+    .nav-item:hover { transform: translateY(-4px) scale(1.04); }
+    .nav-item:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+    .ebook-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      background: var(--card-bg);
+      padding: 1.4rem 1.35rem 1.55rem;
+      box-shadow: var(--elevate);
+      overflow: hidden;
+      isolation: isolate;
+      transform-style: preserve-3d;
+      will-change: transform, box-shadow;
+      transition: transform .65s cubic-bezier(.16,.84,.44,1), box-shadow .5s;
+    }
+    .ebook-card:hover {
+      transform: translateY(-10px) rotate3d(.6,.9,.1,10deg) scale(1.02);
+      box-shadow: var(--elevate-hover);
+      z-index: 5;
+    }
+    .ebook-card:focus-within {
+      outline: 2px solid #f87171;
+      outline-offset: 4px;
+    }
+    .card-glow {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 25%,rgba(255,255,255,0.18),transparent 65%),
+        radial-gradient(circle at 80% 75%,rgba(255,255,255,0.14),transparent 60%);
+      opacity: .28;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .ebook-card:before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(140deg,rgba(255,255,255,0.16),rgba(255,255,255,0) 40%),
+        linear-gradient(20deg,rgba(255,255,255,0.11),rgba(255,255,255,0) 65%);
+      opacity:.22;
+      z-index:0;
+      pointer-events:none;
+      transition:opacity .5s;
+    }
+    .ebook-card:hover:before { opacity:.35; }
+    .tag {
+      font-size:.7rem;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+      display:inline-flex;
+      align-items:center;
+      gap:.4ch;
+      padding:.35rem .6rem .32rem;
+      border-radius:999px;
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,0.14);
+      color:#fef2f2;
+      box-shadow:0 2px 6px -1px rgba(0,0,0,.4);
+    }
+    .gradient-title {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight:800;
+      letter-spacing:.02em;
+      line-height:1.05;
+    }
+    .btn-primary {
+      position: relative;
+      font-weight:600;
+      letter-spacing:.02em;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.55ch;
+      border-radius: 999px;
+      padding:.75rem 1.45rem;
+      background:linear-gradient(90deg,#dc2626,#f87171);
+      color:#fff;
+      box-shadow:0 6px 22px -6px rgba(220,38,38,0.8),0 3px 8px -1px rgba(0,0,0,0.5);
+      transition:all .55s cubic-bezier(.39,.58,.57,1);
+      overflow:hidden;
+      text-decoration:none;
+      cursor:pointer;
+    }
+    .btn-primary:before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg,rgba(255,255,255,0.45),rgba(255,255,255,0) 40%);
+      mix-blend-mode:overlay;
+      opacity:.5;
+      transition:opacity .5s;
+      pointer-events:none;
+    }
+    .btn-primary:hover {
+      transform:translateY(-4px);
+      box-shadow:0 16px 40px -10px rgba(220,38,38,0.9),0 4px 14px -2px rgba(0,0,0,0.55);
+      filter:saturate(1.25);
+    }
+    .btn-primary:hover:before { opacity:.65; }
+    .btn-primary:active {
+      transform:translateY(0);
+      box-shadow:0 6px 18px -6px rgba(220,38,38,0.7);
+    }
+    .btn-primary:focus-visible {
+      outline:3px solid #fecaca;
+      outline-offset:2px;
+    }
+    .filter-bar {
+      backdrop-filter: blur(18px);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 36px -14px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.07);
+      border-radius: 1.4rem;
+      padding: 1.15rem 1.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .filter-bar:before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 10% 10%,rgba(255,255,255,0.4),transparent 70%),
+        radial-gradient(circle at 90% 90%,rgba(255,255,255,0.3),transparent 75%);
+      opacity:.22;
+      mix-blend-mode:overlay;
+      pointer-events:none;
+    }
+    .search-input {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      padding: .72rem 1rem .7rem 2.8rem;
+      color: #fff;
+      width: clamp(240px, 40%, 380px);
+      font-size: .9rem;
+      transition: all .45s;
+      backdrop-filter: blur(6px);
+      position: relative;
+    }
+    .search-input::placeholder { color: #d1d5db; letter-spacing:.03em; }
+    .search-wrapper { position: relative; }
+    .search-wrapper svg {
+      position: absolute;
+      left: 12px; top: 50%;
+      transform: translateY(-50%);
+      width: 20px; height: 20px;
+      stroke: #fca5a5;
+      opacity: .9;
+      pointer-events: none;
+    }
+    .search-input:focus {
+      outline: none;
+      background: rgba(0,0,0,0.5);
+      border-color: #f87171;
+      box-shadow: 0 0 0 3px rgba(248,113,113,0.35);
+    }
+    .filter-tags {
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:.55rem;
+    }
+    .filter-chip {
+      border:1px solid rgba(255,255,255,0.16);
+      background:rgba(255,255,255,0.08);
+      color:#f5f5f5;
+      font-size:.68rem;
+      font-weight:600;
+      padding:.5rem .9rem .42rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      border-radius:999px;
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+      transition:all .5s cubic-bezier(.39,.58,.57,1);
+    }
+    .filter-chip:before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg,rgba(255,255,255,0.35),rgba(255,255,255,0) 70%);
+      opacity:0;
+      transition:opacity .6s;
+      mix-blend-mode:overlay;
+    }
+    .filter-chip:hover { transform:translateY(-3px); }
+    .filter-chip.active {
+      background:linear-gradient(90deg,#dc2626,#f87171);
+      border-color:rgba(255,255,255,0.4);
+      box-shadow:0 6px 20px -6px rgba(248,113,113,0.7);
+    }
+    .filter-chip.active:before { opacity:.55; }
+    .reveal {
+      opacity:0;
+      transform: translateY(40px) scale(.98);
+      transition: opacity 1s cubic-bezier(.16,.84,.44,1),
+        transform 1.1s cubic-bezier(.16,.84,.44,1);
+      will-change: transform, opacity;
+    }
+    .reveal.visible {
+      opacity:1;
+      transform: translateY(0) scale(1);
+    }
+    .float {
+      animation: float 5.6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0);}
+      50% { transform: translateY(-16px);}
+    }
+    .ripple {
+      position:absolute;
+      border-radius:50%;
+      background:radial-gradient(circle at center,rgba(255,255,255,0.55),rgba(255,255,255,0) 70%);
+      transform:scale(0);
+      opacity:.7;
+      pointer-events:none;
+      animation: ripple .75s cubic-bezier(.39,.58,.57,1) forwards;
+      mix-blend-mode:overlay;
+    }
+    @keyframes ripple {
+      0% { transform:scale(0); opacity:.8; }
+      70% { transform:scale(1.9); opacity:.25; }
+      100% { transform:scale(2.5); opacity:0; }
+    }
+    #footer-container {
+      margin-top: 4rem;
+    }
+    ::-webkit-scrollbar { width:11px; }
+    ::-webkit-scrollbar-track { background:rgba(0,0,0,0.25); }
+    ::-webkit-scrollbar-thumb {
+      background:linear-gradient(180deg,#dc2626,#991b1b);
+      border-radius:999px;
+      border:2px solid #0d1117;
+    }
+    /* PDF MODAL */
+    .pdf-modal-bg {
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity .25s;
+    }
+    .pdf-modal-box {
+      position: relative;
+      background: #181818;
+      border-radius: 1.2rem;
+      padding: 0;
+      box-shadow: 0 10px 48px -5px rgba(220,38,38,0.5);
+      max-width: 90vw;
+      max-height: 91vh;
+      width: 850px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 4px solid #991b1b;
+      animation: fadeInModal .35s;
+    }
+    @keyframes fadeInModal {
+      from { transform: translateY(60px) scale(.94); opacity: 0;}
+      to   { transform: translateY(0) scale(1); opacity: 1;}
+    }
+    .pdf-modal-header {
+      padding: .7rem 1.3rem;
+      background: #991b1b;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: .04em;
+      font-size: 1.12rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .pdf-modal-close {
+      background: rgba(255,255,255,0.06);
+      border: none;
+      color: #fff;
+      border-radius: 999px;
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background .2s;
+      font-size: 1.3rem;
+    }
+    .pdf-modal-close:hover { background:rgba(255,255,255,0.18);}
+    .pdf-modal-iframe {
+      border: none;
+      width: 100%;
+      flex: 1 1 0;
+      min-height: 500px;
+      background: #111;
+    }
+    @media (max-width: 900px) {
+      .pdf-modal-box { width: 98vw; }
+    }
+    @media (max-width: 600px) {
+      .pdf-modal-box { border-width: 2px; }
+      .pdf-modal-header { font-size:1rem;padding:.6rem .8rem;}
+    }
+  </style>
+</head>
+<body class="relative">
+
+  <!-- Header -->
+  <header class="site-header py-3 px-5 md:px-8 flex justify-between items-center fixed top-0 left-0 right-0 z-40">
+    <div class="flex items-center space-x-3">
+      <img src="Logo.JPG" alt="โลโก้ EnglishClassroom" class="rounded-full shadow-xl ring-4 ring-white w-14 h-14 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/56x56/dc2626/ffffff?text=Logo';">
+      <a href="homepage.html" class="text-xl font-extrabold text-white tracking-wide drop-shadow hover:opacity-90 transition">EnglishClassroom</a>
+    </div>
+    <nav class="hidden md:flex items-center space-x-6" aria-label="เมนูหลัก">
+      <a href="course.html" class="nav-item flex flex-col items-center group focus:outline-none">
+        <div class="bg-white p-3 rounded-xl mb-1 shadow-md group-hover:shadow-lg transition">
+          <i data-lucide="folder" class="w-7 h-7 text-red-600"></i>
+        </div>
+        <span class="text-xs font-semibold text-white tracking-wide">Courses</span>
+      </a>
+      <a href="quiz.html" class="nav-item flex flex-col items-center group focus:outline-none">
+        <div class="bg-white p-3 rounded-xl mb-1 shadow-md">
+          <i data-lucide="file-text" class="w-7 h-7 text-red-600"></i>
+        </div>
+        <span class="text-xs font-semibold text-white tracking-wide">Quiz</span>
+      </a>
+      <a href="ebook.html" class="nav-item flex flex-col items-center group focus:outline-none">
+        <div class="bg-gradient-to-br from-red-800 to-red-600 p-3 rounded-xl mb-1 shadow-md ring-2 ring-white">
+          <i data-lucide="book-open" class="w-7 h-7 text-white"></i>
+        </div>
+        <span class="text-xs font-semibold text-white tracking-wide">E-Books</span>
+      </a>
+      <a href="gradebook.html" class="nav-item flex flex-col items-center group focus:outline-none">
+        <div class="bg-white p-3 rounded-xl mb-1 shadow-md">
+          <i data-lucide="bar-chart-3" class="w-7 h-7 text-red-600"></i>
+        </div>
+        <span class="text-xs font-semibold text-white tracking-wide">Gradebook</span>
+      </a>
+    </nav>
+    <div class="flex items-center space-x-2">
+      <a href="Profile.html" class="flex items-center bg-white text-red-700 px-4 py-2 rounded-full hover:bg-red-50 transition-colors shadow" aria-label="โปรไฟล์ผู้ใช้">
+        <i data-lucide="user" class="w-5 h-5 text-red-600 stroke-[2.5] mr-2"></i>
+        <span class="text-sm font-medium">Profile</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="pt-36 pb-12 px-5 md:px-0 relative">
+    <div class="max-w-4xl mx-auto text-center reveal">
+      <div class="flex justify-center mb-6">
+        <span class="inline-flex items-center justify-center bg-white/15 dark:shadow-2xl shadow-xl p-6 rounded-3xl float ring-1 ring-white/20">
+          <i data-lucide="book-open-check" class="w-16 h-16 text-red-400 drop-shadow"></i>
+        </span>
+      </div>
+      <h1 class="text-5xl md:text-6xl gradient-title mb-4 tracking-tight">E-Books Library</h1>
+      <p class="text-lg md:text-xl text-gray-200/90 leading-relaxed max-w-2xl mx-auto">
+        คลังหนังสือดิจิทัลภาษาอังกฤษสำหรับทุกระดับ เพิ่มพูนคำศัพท์ แกรมม่า และทักษะการอ่าน ดาวน์โหลดฟรี อัปเดตสม่ำเสมอ
+      </p>
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <section class="px-5 md:px-0 max-w-6xl mx-auto mb-10 reveal" aria-label="ตัวกรองและค้นหา">
+    <div class="filter-bar">
+      <div class="search-wrapper">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="ค้นหา: introduction, permission, likes..." aria-label="ค้นหาอีบุ๊ก">
+      </div>
+      <div class="filter-tags" role="listbox" aria-label="หมวดหมู่">
+        <button class="filter-chip active" data-filter="all" aria-selected="true">ทั้งหมด</button>
+        <button class="filter-chip" data-filter="basic">Basic</button>
+        <button class="filter-chip" data-filter="communication">Communication</button>
+        <button class="filter-chip" data-filter="expressions">Expressions</button>
+      </div>
+      <div class="ml-auto flex items-center gap-2 text-xs opacity-80 font-medium select-none">
+        <i data-lucide="info" class="w-4 h-4"></i>
+        <span id="resultsInfo">แสดงทั้งหมด 3 บทเรียน</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grid -->
+  <main class="px-5 md:px-0 max-w-6xl mx-auto pb-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9 relative">
+
+    <!-- Unit 1 -->
+    <article class="ebook-card reveal" data-title="Unit 1 Introduction" data-tags="basic communication introduction" tabindex="0">
+      <div class="card-glow"></div>
+      <div class="flex items-start justify-between mb-4">
+        <span class="tag"><i data-lucide="user-plus" class="w-3 h-3"></i>Basic</span>
+        <button class="p-2 rounded-full bg-white/10 hover:bg-white/20 transition" title="เพิ่มในรายการโปรด" aria-label="เพิ่มในรายการโปรด">
+          <i data-lucide="heart" class="w-4 h-4 text-rose-300"></i>
+        </button>
+      </div>
+      <div class="flex justify-center mb-4">
+        <i data-lucide="book" class="w-16 h-16 text-red-300 drop-shadow"></i>
+      </div>
+      <h2 class="text-2xl font-bold tracking-tight mb-2 leading-snug">Unit 1 Introduction</h2>
+      <p class="text-gray-200/85 text-sm leading-relaxed mb-5">
+        เรียนรู้ประโยคแนะนำตัวเองและผู้อื่นในชีวิตประจำวัน พร้อมตัวอย่างบทสนทนา
+      </p>
+      <div class="flex flex-wrap gap-2 mb-5">
+        <span class="tag">Greeting</span>
+        <span class="tag">Self-intro</span>
+        <span class="tag">Basic</span>
+      </div>
+      <button class="btn-primary w-full open-pdf-btn" data-pdf="ebooks/unit1_introduction.pdf" data-title="Unit 1 Introduction">
+        <i data-lucide="book-open" class="w-4 h-4"></i> เปิดอ่านไฟล์ PDF
+      </button>
+    </article>
+
+    <!-- Unit 2 -->
+    <article class="ebook-card reveal" data-title="Unit 2 Permission and Request" data-tags="communication expressions permission request" tabindex="0">
+      <div class="card-glow"></div>
+      <div class="flex items-start justify-between mb-4">
+        <span class="tag"><i data-lucide="key" class="w-3 h-3"></i>Communication</span>
+        <button class="p-2 rounded-full bg-white/10 hover:bg-white/20 transition" title="เพิ่มในรายการโปรด" aria-label="เพิ่มในรายการโปรด">
+          <i data-lucide="heart" class="w-4 h-4 text-rose-300"></i>
+        </button>
+      </div>
+      <div class="flex justify-center mb-4">
+        <i data-lucide="book" class="w-16 h-16 text-red-300 drop-shadow"></i>
+      </div>
+      <h2 class="text-2xl font-bold tracking-tight mb-2 leading-snug">Unit 2 Permission and Request</h2>
+      <p class="text-gray-200/85 text-sm leading-relaxed mb-5">
+        ฝึกขออนุญาตและร้องขออย่างสุภาพในสถานการณ์ต่างๆ พร้อมโครงสร้างประโยคและตัวอย่าง
+      </p>
+      <div class="flex flex-wrap gap-2 mb-5">
+        <span class="tag">Permission</span>
+        <span class="tag">Request</span>
+        <span class="tag">Polite</span>
+      </div>
+      <button class="btn-primary w-full open-pdf-btn" data-pdf="ebooks/unit2_permission_request.pdf" data-title="Unit 2 Permission and Request">
+        <i data-lucide="book-open" class="w-4 h-4"></i> เปิดอ่านไฟล์ PDF
+      </button>
+    </article>
+
+    <!-- Unit 3 -->
+    <article class="ebook-card reveal" data-title="Unit 3 Likes and Dislikes" data-tags="expressions likes dislikes communication" tabindex="0">
+      <div class="card-glow"></div>
+      <div class="flex items-start justify-between mb-4">
+        <span class="tag"><i data-lucide="smile" class="w-3 h-3"></i>Expressions</span>
+        <button class="p-2 rounded-full bg-white/10 hover:bg-white/20 transition" title="เพิ่มในรายการโปรด" aria-label="เพิ่มในรายการโปรด">
+          <i data-lucide="heart" class="w-4 h-4 text-rose-300"></i>
+        </button>
+      </div>
+      <div class="flex justify-center mb-4">
+        <i data-lucide="book" class="w-16 h-16 text-red-300 drop-shadow"></i>
+      </div>
+      <h2 class="text-2xl font-bold tracking-tight mb-2 leading-snug">Unit 3 Likes and Dislikes</h2>
+      <p class="text-gray-200/85 text-sm leading-relaxed mb-5">
+        บอกความชอบและไม่ชอบในภาษาอังกฤษอย่างมั่นใจ พร้อมตัวอย่างประโยคและคำศัพท์ที่ใช้บ่อย
+      </p>
+      <div class="flex flex-wrap gap-2 mb-5">
+        <span class="tag">Likes</span>
+        <span class="tag">Dislikes</span>
+        <span class="tag">Feelings</span>
+      </div>
+      <button class="btn-primary w-full open-pdf-btn" data-pdf="ebooks/unit3_likes_dislikes.pdf" data-title="Unit 3 Likes and Dislikes">
+        <i data-lucide="book-open" class="w-4 h-4"></i> เปิดอ่านไฟล์ PDF
+      </button>
+    </article>
+  </main>
+
+  <!-- PDF Modal -->
+  <div id="pdfModal" class="pdf-modal-bg" style="display:none;">
+    <div class="pdf-modal-box">
+      <div class="pdf-modal-header">
+        <span id="pdfModalTitle">PDF Title</span>
+        <button class="pdf-modal-close" id="pdfModalCloseBtn" aria-label="ปิด">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <iframe class="pdf-modal-iframe" id="pdfModalIframe" src="" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="footer-container" class="reveal"></div>
+
+  <script>
+    function initIcons() {
+      if (window.lucide) lucide.createIcons();
+    }
+    document.addEventListener('DOMContentLoaded', initIcons);
+
+    // PDF Modal logic
+    const pdfModal = document.getElementById('pdfModal');
+    const pdfModalIframe = document.getElementById('pdfModalIframe');
+    const pdfModalTitle = document.getElementById('pdfModalTitle');
+    const pdfModalCloseBtn = document.getElementById('pdfModalCloseBtn');
+    document.querySelectorAll('.open-pdf-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const pdf = btn.getAttribute('data-pdf');
+        const title = btn.getAttribute('data-title');
+        pdfModalIframe.src = pdf;
+        pdfModalTitle.textContent = title;
+        pdfModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => { initIcons(); }, 10);
+      });
+    });
+    function closePdfModal() {
+      pdfModal.style.display = 'none';
+      pdfModalIframe.src = '';
+      document.body.style.overflow = '';
+    }
+    pdfModalCloseBtn.addEventListener('click', closePdfModal);
+    pdfModal.addEventListener('click', function(e){
+      if(e.target === pdfModal) closePdfModal();
+    });
+    document.addEventListener('keydown', function(e){
+      if(pdfModal.style.display === 'flex' && (e.key === 'Escape' || e.key === 'Esc')) {
+        closePdfModal();
+      }
+    });
+
+    // Reveal effect
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // 3D Tilt effect
+    const tiltCards = document.querySelectorAll('.ebook-card');
+    tiltCards.forEach(card => {
+      card.addEventListener('pointermove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rx = ((y / rect.height) - 0.5) * -12;
+        const ry = ((x / rect.width) - 0.5) * 14;
+        card.style.transform = `translateY(-6px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.015)`;
+      });
+      card.addEventListener('pointerenter', () => {
+        card.style.transition = 'transform .35s';
+        setTimeout(() => card.style.transition = '', 360);
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.transition = 'transform .65s cubic-bezier(.16,.84,.44,1)';
+        card.style.transform = '';
+        setTimeout(() => card.style.transition = '', 700);
+      });
+      card.addEventListener('click', e => {
+        const r = document.createElement('span');
+        r.className = 'ripple';
+        const rect = card.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height) * 0.75;
+        r.style.width = r.style.height = size + 'px';
+        r.style.left = (e.clientX - rect.left - size/2) + 'px';
+        r.style.top = (e.clientY - rect.top - size/2) + 'px';
+        card.appendChild(r);
+        setTimeout(() => r.remove(), 750);
+      });
+    });
+
+    // Search & Filter
+    const searchInput = document.getElementById('searchInput');
+    const filterChips = document.querySelectorAll('.filter-chip');
+    const cards = document.querySelectorAll('.ebook-card');
+    const resultsInfo = document.getElementById('resultsInfo');
+    let activeFilter = 'all';
+    function filterCards() {
+      const q = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const title = card.dataset.title.toLowerCase();
+        const tags = card.dataset.tags.toLowerCase();
+        const matchText = !q || title.includes(q) || tags.includes(q);
+        const matchFilter = activeFilter === 'all' || tags.includes(activeFilter);
+        if (matchText && matchFilter) {
+          card.style.display = '';
+          visibleCount++;
+          setTimeout(() => card.classList.add('visible'), 30);
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      resultsInfo.textContent = visibleCount
+        ? `พบ ${visibleCount} บทเรียน`
+        : 'ไม่พบบทเรียนที่ตรงคำค้น';
+    }
+    searchInput.addEventListener('input', filterCards);
+    filterChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        filterChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        activeFilter = chip.dataset.filter;
+        filterCards();
+      });
+    });
+
+    // Footer & Keyboard
+    fetch('footer.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('footer-container').innerHTML = html;
+        initIcons();
+      })
+      .catch(() => {
+        document.getElementById('footer-container').innerHTML = `
+          <div class="text-center text-sm opacity-60 py-10">
+            © ${new Date().getFullYear()} EnglishClassroom — All Rights Reserved.
+          </div>`;
+      });
+    cards.forEach(card => {
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+          const btn = card.querySelector('.open-pdf-btn');
+          btn && btn.click();
+        }
+      });
+    });
+    filterCards();
+  </script>
+</body>
+</html>

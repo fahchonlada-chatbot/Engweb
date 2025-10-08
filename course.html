@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - EnglishClassroom</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #0d1117;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 50;
+        }
+        main { flex: 1; }
+        .nav-item { transition: all 0.3s; }
+        .nav-item:hover { transform: translateY(-3px); }
+        html { scroll-behavior: smooth; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .fade-in { animation: fadeIn 1.0s cubic-bezier(.39,.58,.57,1) forwards; }
+        .course-card {
+            background: linear-gradient(140deg, #1f2937 80%, #991b1b 120%);
+            border-radius: 1.25rem;
+            box-shadow: 0 8px 32px 0 rgba(220,38,38,0.22);
+            transition: transform 0.35s cubic-bezier(.39,.58,.57,1), box-shadow 0.3s;
+            will-change: transform;
+            position: relative;
+            overflow: hidden;
+        }
+        .course-card:hover {
+            transform: scale(1.035) translateY(-8px) rotate(-1deg);
+            box-shadow: 0 24px 70px -8px #991b1b99, 0 2px 16px 0 #fff4;
+            z-index: 3;
+        }
+        .card-glow {
+            position: absolute;
+            top: -50px; left: 50%; transform: translateX(-50%);
+            width: 140%; height: 70px;
+            background: radial-gradient(ellipse at center, #991b1bcc 0%, #0d111700 80%);
+            filter: blur(15px);
+            opacity: 0.18;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .card-badge {
+            position: absolute;
+            top: 16px; left: 16px;
+            background: #ef4444;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: 0.7rem;
+            padding: 0.35em 1.1em;
+            box-shadow: 0 4px 20px -4px #ef444488;
+            letter-spacing: .02em;
+            z-index: 9;
+        }
+        .ripple {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 0.5s linear;
+            background-color: rgba(239,68,68,0.19);
+            z-index: 100;
+        }
+        @keyframes ripple {
+            to { transform: scale(3.5); opacity: 0; }
+        }
+        .img-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .img-shine:after {
+            content: "";
+            position: absolute;
+            top: 0; left: -75%;
+            width: 50%; height: 100%;
+            background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.16) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg);
+            animation: shine 2.3s infinite cubic-bezier(.39,.58,.57,1);
+        }
+        @keyframes shine {
+            0% { left: -75%; }
+            60% { left: 120%; }
+            100% { left: 120%; }
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: max-content;
+            background: #22223b;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 6px 14px;
+            position: absolute;
+            z-index: 20;
+            bottom: 120%; left: 50%; transform: translateX(-50%);
+            opacity: 0; transition: opacity 0.3s;
+            font-size: 0.90rem;
+            white-space: nowrap;
+            box-shadow: 0 2px 12px #0007;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        @media (max-width: 400px) {.card-badge {font-size: 0.7rem;}}
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header class="py-3 px-6 flex justify-between items-center z-50 bg-red-600 bg-opacity-95 backdrop-blur-sm shadow-2xl">
+        <div class="flex items-center space-x-3">
+            <img src="Logo.JPG" alt="Main Logo" class="rounded-full shadow-2xl ring-4 ring-white w-14 h-14" onerror="this.onerror=null; this.src='https://placehold.co/56x56/dc2626/ffffff?text=Logo';">
+            <a href="homepage.html" class="text-xl font-extrabold text-gray-100 hover:text-red-300 transition-colors duration-300">EnglishClassroom</a>
+        </div>
+        <nav class="flex items-center space-x-6">
+            <a href="course.html" class="nav-item flex flex-col items-center group">
+               <div class="bg-red-800 p-3 rounded-lg mb-1 shadow-md ring-2 ring-white">
+<i data-lucide="file-text" class="w-7 h-7 text-white"></i>
+                </div>
+                <span class="text-sm font-semibold text-red-300">Courses</span>
+            </a>
+            <a href="quiz.html" class="nav-item flex flex-col items-center group">
+                <div class="bg-white p-3 rounded-lg mb-1 shadow-md">
+                    <i data-lucide="file-text" class="w-7 h-7 text-red-600"></i>
+                </div>
+                <span class="text-sm font-semibold text-white">Quiz</span>
+            </a>
+            <a href="ebook.html" class="nav-item flex flex-col items-center group">
+                <div class="bg-white p-3 rounded-lg mb-1 shadow-md">
+                    <i data-lucide="book-open" class="w-7 h-7 text-red-600"></i>
+                </div>
+                <span class="text-sm font-semibold text-white">E-Books</span>
+            </a>
+            <a href="gradebook.html" class="nav-item flex flex-col items-center group">
+                <div class="bg-white p-3 rounded-lg mb-1 shadow-md">
+                    <i data-lucide="bar-chart-3" class="w-7 h-7 text-red-600"></i>
+                </div>
+                <span class="text-sm font-semibold text-white">Gradebook</span>
+            </a>
+        </nav>
+        <div class="flex items-center space-x-2">
+            <a href="Profile.html" class="flex items-center bg-white px-4 py-2 rounded-full hover:bg-gray-100 transition-colors duration-300 shadow-md">
+                <i data-lucide="user" class="w-6 h-6 text-red-600 stroke-[2.5] mr-2"></i>
+                <span class="text-sm font-medium text-gray-800">Profile</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-14 pt-28 md:pt-32 text-center flex flex-col justify-center items-center overflow-hidden bg-gradient-to-b from-[#991b1b] to-[#1f2937]">
+        <div class="w-full absolute left-0 top-0 pointer-events-none z-0" style="height:100%;opacity:.22;
+            background: url('https://www.transparenttextures.com/patterns/dark-mosaic.png') repeat;"></div>
+        <div class="z-10 relative fade-in">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-white drop-shadow-lg mb-4">English Conversation</h1>
+            <p class="max-w-xl mx-auto text-lg text-gray-100 bg-white/10 backdrop-blur-md rounded-xl shadow px-5 py-2 mb-5">เลือกหัวข้อการเรียนภาษาอังกฤษที่เหมาะกับคุณ</p>
+        </div>
+        <svg class="absolute left-0 bottom-0 w-full" height="70" viewBox="0 0 1440 70" fill="none" xmlns="http://www.w3.org/2000/svg" style="z-index:2">
+            <path fill="#0d1117" fill-opacity="1" d="M0,64L60,69.3C120,75,240,85,360,66.7C480,48,600,10,720,10C840,10,960,48,1080,62.7C1200,77,1320,69,1380,64.3L1440,60V70H0Z"></path>
+        </svg>
+    </section>
+
+    <!-- Main Content Area: Course Grid -->
+    <main class="container mx-auto px-4 py-10 md:px-8 md:py-14 relative z-20">
+        <h2 class="text-3xl sm:text-4xl font-bold text-red-400 mb-10 text-center fade-in">All English Courses</h2>
+        <div id="course-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            <!-- Unit 1 Card -->
+            <div class="course-card fade-in" style="animation-delay: 0.10s;">
+                <span class="card-badge floating">NEW</span>
+                <div class="card-glow"></div>
+                <div class="img-shine w-full aspect-square relative">
+                    <img src="unit1.PNG"
+                         alt="Unit 1 - Introductions"
+                         class="w-full h-full object-cover rounded-t-xl border-b-4 border-red-500"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x600/991b1b/ffffff?text=Unit+1%0AIntroductions';">
+                </div>
+                <div class="p-6 flex flex-col flex-grow z-10 relative">
+                    <div class="mb-3">
+                        <h3 class="text-2xl font-bold text-white mb-1">Unit 1: Introductions & Small Talk</h3>
+                        <div class="flex flex-wrap gap-2 mb-2 justify-center">
+                            <span class="bg-red-900 text-red-200 px-3 py-1 rounded text-xs font-medium">Beginner</span>
+                            <span class="bg-gray-900 text-gray-200 px-3 py-1 rounded text-xs font-medium">Speaking</span>
+                        </div>
+                        <div class="bg-gray-900 bg-opacity-80 rounded-lg p-3 text-gray-100 text-sm shadow text-center">
+                            เรียนรู้การทักทาย แนะนำตัวเอง สร้างบทสนทนา และ Small Talk สำหรับชีวิตประจำวัน
+                        </div>
+                    </div>
+                    <div class="mt-auto flex justify-end">
+                        <button class="learning-btn bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg uppercase tracking-wider relative overflow-hidden w-full tooltip"
+                                onclick="rippleEffect(event, this); window.location.href='unit1.html';">
+                            <span>Learning</span>
+                            <span class="tooltiptext">ไปที่เนื้อหายูนิตนี้</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Unit 2 Card -->
+            <div class="course-card fade-in" style="animation-delay: 0.25s;">
+                <span class="card-badge floating">HOT</span>
+                <div class="card-glow"></div>
+                <div class="img-shine w-full aspect-square relative">
+                    <img src="unit2.jpg"
+                         alt="Unit 2 - Permission and Request"
+                         class="w-full h-full object-cover rounded-t-xl border-b-4 border-red-500"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x600/991b1b/ffffff?text=Unit+2%0APermission';">
+                </div>
+                <div class="p-6 flex flex-col flex-grow z-10 relative">
+                    <div class="mb-3">
+                        <h3 class="text-2xl font-bold text-white mb-1">Unit 2: Permission & Request</h3>
+                        <div class="flex flex-wrap gap-2 mb-2 justify-center">
+                            <span class="bg-red-900 text-red-200 px-3 py-1 rounded text-xs font-medium">Politeness</span>
+                            <span class="bg-gray-900 text-gray-200 px-3 py-1 rounded text-xs font-medium">Real-life</span>
+                        </div>
+                        <div class="bg-gray-900 bg-opacity-80 rounded-lg p-3 text-gray-100 text-sm shadow text-center">
+                            ฝึกขออนุญาต ขอร้อง ขอความช่วยเหลืออย่างสุภาพในสถานการณ์ต่างๆ
+                        </div>
+                    </div>
+                    <div class="mt-auto flex justify-end">
+                        <button class="learning-btn bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg uppercase tracking-wider relative overflow-hidden w-full tooltip"
+                                onclick="rippleEffect(event, this); window.location.href='unit2.html';">
+                            <span>Learning</span>
+                            <span class="tooltiptext">ไปที่เนื้อหายูนิตนี้</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Unit 3 Card -->
+            <div class="course-card fade-in" style="animation-delay: 0.38s;">
+                <div class="card-glow"></div>
+                <div class="img-shine w-full aspect-square relative">
+                    <img src="unit3.png"
+                         alt="Unit 3 - Like and Dislike"
+                         class="w-full h-full object-cover rounded-t-xl border-b-4 border-red-500"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x600/991b1b/ffffff?text=Unit+3%0ALike+%26+Dislike';">
+                </div>
+                <div class="p-6 flex flex-col flex-grow z-10 relative">
+                    <div class="mb-3">
+                        <h3 class="text-2xl font-bold text-white mb-1">Unit 3: Likes & Dislikes</h3>
+                        <div class="flex flex-wrap gap-2 mb-2 justify-center">
+                            <span class="bg-red-900 text-red-200 px-3 py-1 rounded text-xs font-medium">Personal</span>
+                            <span class="bg-gray-900 text-gray-200 px-3 py-1 rounded text-xs font-medium">Fun</span>
+                        </div>
+                        <div class="bg-gray-900 bg-opacity-80 rounded-lg p-3 text-gray-100 text-sm shadow text-center">
+                            เรียนรู้การแสดงความชอบ-ไม่ชอบ แสดงความคิดเห็น ใช้ได้จริงในทุกสถานการณ์
+                        </div>
+                    </div>
+                    <div class="mt-auto flex justify-end">
+                        <button class="learning-btn bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg uppercase tracking-wider relative overflow-hidden w-full tooltip"
+                                onclick="rippleEffect(event, this); window.location.href='unit3.html';">
+                            <span>Learning</span>
+                            <span class="tooltiptext">ไปที่เนื้อหายูนิตนี้</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating icon SVG decorations (keep in red/gray tone) -->
+    <div class="fixed right-0 bottom-0 pointer-events-none z-40">
+        <svg class="floating" width="80" height="80" fill="none" viewBox="0 0 80 80">
+            <circle cx="40" cy="40" r="30" fill="#991b1b" fill-opacity="0.13"/>
+            <circle cx="40" cy="40" r="15" fill="#dc2626" fill-opacity="0.18"/>
+            <rect x="55" y="10" width="10" height="10" rx="4" fill="#fff" fill-opacity="0.10"/>
+        </svg>
+    </div>
+    <div class="fixed left-0 top-0 pointer-events-none z-40">
+        <svg class="floating" width="70" height="70" fill="none" viewBox="0 0 70 70">
+            <rect x="10" y="10" width="50" height="50" rx="15" fill="#991b1b" fill-opacity="0.11"/>
+            <circle cx="20" cy="55" r="6" fill="#dc2626" fill-opacity="0.12"/>
+        </svg>
+    </div>
+
+    <!-- Footer Section -->
+    <div id="footer-container"></div>
+    <script>
+        // Lucide icons
+        lucide.createIcons();
+
+        // Fade-in animation on scroll
+        document.querySelectorAll('.fade-in').forEach((el, idx) => {
+            el.style.opacity = 0;
+            el.style.animationDelay = (el.style.animationDelay || ((idx*0.1) + 0.18) + "s");
+        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    entry.target.style.opacity = 1;
+                }
+            });
+        }, {threshold: 0.2});
+        document.querySelectorAll('.course-card, .fade-in').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Ripple effect for buttons
+        function rippleEffect(e, btn) {
+            const rect = btn.getBoundingClientRect();
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
+            ripple.style.left = (e.clientX - rect.left - rect.width/2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - rect.height/2) + 'px';
+            btn.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 500);
+        }
+
+        // Load footer
+        fetch('footer.html')
+          .then(res => res.text())
+          .then(html => {
+            document.getElementById('footer-container').innerHTML = html;
+            if (window.lucide) lucide.createIcons();
+          });
+    </script>
+</body>
+</html>

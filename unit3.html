@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 3: Likes and Dislikes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-image: url('E.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.82);
+            z-index: -2;
+        }
+        .glass-effect {
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.32);
+        }
+        .animated-title {
+            animation: popIn 0.8s cubic-bezier(.4,2,.2,1);
+        }
+        @keyframes popIn {
+            0% { opacity:0; transform: scale(0.8);}
+            100% { opacity:1; transform: scale(1);}
+        }
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0);}
+            50% { transform: translateY(-12px);}
+        }
+        .fade-in-up {
+            opacity:0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.7s forwards;
+        }
+        @keyframes fadeInUp {
+            to { opacity:1; transform: translateY(0);}
+        }
+        .example-card {
+            transition: box-shadow 0.25s, transform 0.25s;
+            backdrop-filter: blur(7px);
+        }
+        .example-card:hover {
+            box-shadow: 0 10px 26px #dc26263d;
+            transform: translateY(-6px) scale(1.025);
+        }
+        .table-row:hover {
+            background-color: #fff7f7 !important;
+            transition: background .25s;
+        }
+        .btn-next, .btn-prev {
+            background: linear-gradient(90deg,#ef4444,#be123c);
+            color: #fff;
+            box-shadow: 0 2px 10px #991b1b33;
+            transition: background 0.25s, transform 0.18s;
+        }
+        .btn-next:hover, .btn-prev:hover {
+            background: linear-gradient(90deg,#be123c,#ef4444);
+            transform: translateY(-2px) scale(1.06);
+            box-shadow: 0 8px 32px #be123c44;
+        }
+        .unit-badge {
+            background: linear-gradient(90deg,#f472b6,#f59e42);
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 1.1rem;
+            margin-right: 0.7em;
+            padding: 0.3em 1.1em;
+            box-shadow: 0 3px 14px -4px #ef444488;
+            letter-spacing: .01em;
+        }
+        .section-divider {
+            border: none;
+            border-top: 2px dashed #ef4444;
+            margin: 2.5rem 0 2rem 0;
+            opacity: 0.3;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #dedede;
+            height: 0;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-red-600 to-red-700 shadow-2xl sticky top-0 z-50 border-b-4 border-red-800">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white p-2 rounded-full shadow-lg floating">
+                    <i data-lucide="heart" class="w-6 h-6 text-red-600"></i>
+                </div>
+                <span class="unit-badge floating">Unit 3</span>
+                <h1 class="text-2xl font-bold text-white drop-shadow-lg">Likes and Dislikes</h1>
+            </div>
+            <a href="course.html" class="flex items-center space-x-2 bg-white px-4 py-2 rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl">
+                <i data-lucide="home" class="w-5 h-5 text-red-600"></i>
+                <span class="font-medium text-gray-800">Courses</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Animated Unit Title -->
+        <div class="glass-effect rounded-2xl shadow-2xl p-8 mb-8 animated-title border-l-8 border-red-600">
+            <h2 class="text-4xl font-bold text-gray-800 mb-3 tracking-tight fade-in-up" style="animation-delay:.12s">Unit 3: Likes and Dislikes</h2>
+            <h3 class="text-2xl font-semibold text-red-600 mb-2 fade-in-up" style="animation-delay:.22s">ความชอบและความไม่ชอบ</h3>
+            <p class="text-xl text-gray-600 fade-in-up" style="animation-delay:.28s">
+                เรียนรู้วิธีการแสดงความชอบและไม่ชอบในภาษาอังกฤษ ทั้งแบบเป็นทางการและไม่เป็นทางการ พร้อมตัวอย่างประโยคและบทสนทนา!
+            </p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="glass-effect rounded-2xl shadow-2xl p-8 mb-8 fade-in-up" style="animation-delay:.33s">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-gradient-to-br from-red-500 to-pink-500 p-3 rounded-lg shadow-lg floating">
+                    <i data-lucide="video" class="w-8 h-8 text-white"></i>
+                </div>
+                <h3 class="text-3xl font-bold text-gray-800">วิดีโอบทเรียน</h3>
+            </div>
+            <div class="video-container shadow-2xl rounded-xl overflow-hidden mb-3">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/CUZgrI0ISc8?si=pOUSJtO4PrKYHC4_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    title="Unit 3 Likes and Dislikes"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+            <div class="text-center mt-2">
+                <span class="inline-block bg-red-100 text-red-700 px-3 py-1 rounded-xl text-sm">
+                    <i data-lucide="info" class="w-4 h-4 inline-block align-middle mr-1"></i>
+                    คลิปเรียนรู้เนื้อหา Unit 3 แบบละเอียด
+                </span>
+            </div>
+        </div>
+
+        <!-- Main Comparison Table -->
+        <div class="glass-effect rounded-2xl shadow-2xl p-8 mb-8 fade-in-up" style="animation-delay:.40s">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-gradient-to-br from-purple-500 to-pink-500 p-3 rounded-lg shadow-lg">
+                    <i data-lucide="compare" class="w-8 h-8 text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">ตารางเปรียบเทียบการใช้งาน (Informal vs Formal)</h3>
+            </div>
+            <div class="overflow-x-auto rounded-xl shadow-xl">
+                <table class="w-full border-collapse bg-white rounded-lg overflow-hidden">
+                    <thead>
+                        <tr class="bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+                            <th class="px-6 py-4 text-left font-semibold">ประเภท</th>
+                            <th class="px-6 py-4 text-left font-semibold">โครงสร้าง (English)</th>
+                            <th class="px-6 py-4 text-left font-semibold">คำแปล (ไทย)</th>
+                            <th class="px-6 py-4 text-left font-semibold">การใช้</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row border-b">
+                            <td class="px-6 py-4 font-semibold text-blue-600" rowspan="4">Informal<br>(ไม่เป็นทางการ)</td>
+                            <td class="px-6 py-4 font-medium">I like … / I don't like …</td>
+                            <td class="px-6 py-4">ฉันชอบ… / ฉันไม่ชอบ…</td>
+                            <td class="px-6 py-4">ใช้พูดในชีวิตประจำวันกับเพื่อน ครอบครัว คนสนิท</td>
+                        </tr>
+                        <tr class="table-row border-b">
+                            <td class="px-6 py-4 font-medium">I love … / I hate …</td>
+                            <td class="px-6 py-4">ฉันรัก/หลงใหล… / ฉันเกลียด…</td>
+                            <td class="px-6 py-4">แสดงความรู้สึกแรง ๆ</td>
+                        </tr>
+                        <tr class="table-row border-b">
+                            <td class="px-6 py-4 font-medium">I'm into …</td>
+                            <td class="px-6 py-4">ฉันสนใจ/อินกับ…</td>
+                            <td class="px-6 py-4">ใช้บอกความชอบแบบกันเอง</td>
+                        </tr>
+                        <tr class="table-row border-b">
+                            <td class="px-6 py-4 font-medium">I'm not into …</td>
+                            <td class="px-6 py-4">ฉันไม่อิน/ไม่สนใจ…</td>
+                            <td class="px-6 py-4">ใช้กับสิ่งที่ไม่ชอบ</td>
+                        </tr>
+                        <tr class="table-row border-b">
+                            <td class="px-6 py-4 font-semibold text-purple-600" rowspan="4">Formal<br>(เป็นทางการ)</td>
+                            <td class="px-6 py-4 font-medium">I enjoy … / I don't enjoy …</td>
+                            <td class="px-6 py-4">ฉันเพลิดเพลินกับ… / ฉันไม่เพลิดเพลินกับ…</td>
+                            <td class="px-6 py-4">ใช้ในงานเขียน รายงาน หรือการพูดสุภาพ</td>
+                        </tr>
+                        <tr class="table-row border-b">
+                            <td class="px-6 py-4 font-medium">I prefer … (to …)</td>
+                            <td class="px-6 py-4">ฉันชอบ…มากกว่า…</td>
+                            <td class="px-6 py-4">ใช้เปรียบเทียบความชอบ</td>
+                        </tr>
+                        <tr class="table-row border-b">
+                            <td class="px-6 py-4 font-medium">I appreciate …</td>
+                            <td class="px-6 py-4">ฉันซาบซึ้ง/ชื่นชม…</td>
+                            <td class="px-6 py-4">ใช้ในงานทางการหรือสุภาพ</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="px-6 py-4 font-medium">I'm fond of …</td>
+                            <td class="px-6 py-4">ฉันชอบ/เอ็นดู…</td>
+                            <td class="px-6 py-4">ใช้สุภาพและนุ่มนวล</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Example Sentences Section -->
+        <div class="glass-effect rounded-2xl shadow-2xl p-8 mb-8 fade-in-up" style="animation-delay:.47s">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-gradient-to-br from-blue-500 to-cyan-500 p-3 rounded-lg shadow-lg">
+                    <i data-lucide="message-square" class="w-8 h-8 text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">ตัวอย่างประโยค (Examples)</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Informal Examples -->
+                <div>
+                    <h4 class="text-xl font-bold text-blue-600 mb-4 flex items-center">
+                        <i data-lucide="smile" class="w-6 h-6 mr-2"></i> Informal (ไม่เป็นทางการ)
+                    </h4>
+                    <div class="space-y-3">
+                        <div class="example-card bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500 shadow">
+                            <p class="font-semibold text-gray-800">I like pizza.</p>
+                            <p class="text-gray-600 text-sm">→ ฉันชอบพิซซ่า</p>
+                        </div>
+                        <div class="example-card bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500 shadow">
+                            <p class="font-semibold text-gray-800">I don't like waking up early.</p>
+                            <p class="text-gray-600 text-sm">→ ฉันไม่ชอบตื่นเช้า</p>
+                        </div>
+                        <div class="example-card bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500 shadow">
+                            <p class="font-semibold text-gray-800">I love watching movies with friends.</p>
+                            <p class="text-gray-600 text-sm">→ ฉันรักการดูหนังกับเพื่อน ๆ</p>
+                        </div>
+                        <div class="example-card bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500 shadow">
+                            <p class="font-semibold text-gray-800">I'm into K-pop.</p>
+                            <p class="text-gray-600 text-sm">→ ฉันอินกับเคป็อป</p>
+                        </div>
+                        <div class="example-card bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500 shadow">
+                            <p class="font-semibold text-gray-800">I'm not into football.</p>
+                            <p class="text-gray-600 text-sm">→ ฉันไม่อินกับฟุตบอล</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formal Examples -->
+                <div>
+                    <h4 class="text-xl font-bold text-purple-600 mb-4 flex items-center">
+                        <i data-lucide="briefcase" class="w-6 h-6 mr-2"></i> Formal (เป็นทางการ)
+                    </h4>
+                    <div class="space-y-3">
+                        <div class="example-card bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500 shadow">
+                            <p class="font-semibold text-gray-800">I enjoy reading English novels.</p>
+                            <p class="text-gray-600 text-sm">→ ฉันเพลิดเพลินกับการอ่านนวนิยายภาษาอังกฤษ</p>
+                        </div>
+                        <div class="example-card bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500 shadow">
+                            <p class="font-semibold text-gray-800">I don't enjoy crowded places.</p>
+                            <p class="text-gray-600 text-sm">→ ฉันไม่เพลิดเพลินกับที่ที่มีคนเยอะ</p>
+                        </div>
+                        <div class="example-card bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500 shadow">
+                            <p class="font-semibold text-gray-800">I prefer tea to coffee.</p>
+                            <p class="text-gray-600 text-sm">→ ฉันชอบชามากกว่ากาแฟ</p>
+                        </div>
+                        <div class="example-card bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500 shadow">
+                            <p class="font-semibold text-gray-800">I appreciate classical music.</p>
+                            <p class="text-gray-600 text-sm">→ ฉันชื่นชมดนตรีคลาสสิก</p>
+                        </div>
+                        <div class="example-card bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500 shadow">
+                            <p class="font-semibold text-gray-800">I'm fond of teaching young children.</p>
+                            <p class="text-gray-600 text-sm">→ ฉันชอบการสอนเด็กเล็ก</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Usage Note -->
+            <div class="mt-6 bg-yellow-50 rounded-xl p-5 border-l-4 border-yellow-500">
+                <div class="flex items-start">
+                    <i data-lucide="lightbulb" class="w-6 h-6 text-yellow-600 mr-3 mt-1"></i>
+                    <div>
+                        <h5 class="font-bold text-yellow-800 mb-2">การใช้งาน</h5>
+                        <p class="text-gray-700 mb-1"><strong>Informal:</strong> เวลาพูดกับเพื่อน คนสนิท หรือในชีวิตประจำวัน</p>
+                        <p class="text-gray-700"><strong>Formal:</strong> เวลาสื่อสารในงานเขียน จดหมายธุรกิจ การนำเสนอ หรือพูดกับผู้ใหญ่/คนที่ไม่สนิท</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Practice Dialogue -->
+        <div class="glass-effect rounded-2xl shadow-2xl p-8 mb-8 fade-in-up" style="animation-delay:.54s">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-gradient-to-br from-cyan-500 to-blue-600 p-3 rounded-lg shadow-lg">
+                    <i data-lucide="mic" class="w-8 h-8 text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">บทสนทนาตัวอย่าง (Dialogue)</h3>
+            </div>
+            <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 border-l-4 border-blue-400 shadow-lg">
+                <div class="space-y-3">
+                    <p class="text-gray-800"><strong class="text-blue-600">A:</strong> What do you like to do in your free time?</p>
+                    <p class="text-gray-600 text-sm ml-6">→ คุณชอบทำอะไรในเวลาว่าง</p>
+                    
+                    <p class="text-gray-800"><strong class="text-pink-600">B:</strong> I like playing football, but I don't like studying late at night.</p>
+                    <p class="text-gray-600 text-sm ml-6">→ ฉันชอบเล่นฟุตบอล แต่ไม่ชอบอ่านหนังสือดึก ๆ</p>
+                    
+                    <p class="text-gray-800"><strong class="text-blue-600">A:</strong> I prefer reading books to watching TV.</p>
+                    <p class="text-gray-600 text-sm ml-6">→ ฉันชอบอ่านหนังสือมากกว่าดูทีวี</p>
+                    
+                    <p class="text-gray-800"><strong class="text-pink-600">B:</strong> Really? I'm into movies.</p>
+                    <p class="text-gray-600 text-sm ml-6">→ จริงเหรอ? ฉันอินกับการดูหนังมากเลย</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Useful Questions -->
+        <div class="glass-effect rounded-2xl shadow-2xl p-8 mb-8 fade-in-up" style="animation-delay:.61s">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-gradient-to-br from-green-500 to-emerald-500 p-3 rounded-lg shadow-lg">
+                    <i data-lucide="help-circle" class="w-8 h-8 text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">คำถามที่ใช้บ่อย (Useful Questions)</h3>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="example-card bg-green-50 rounded-lg p-4 border-l-4 border-green-500 shadow">
+                    <p class="font-semibold text-gray-800">What do you like?</p>
+                    <p class="text-gray-600 text-sm">→ คุณชอบอะไร</p>
+                </div>
+                <div class="example-card bg-green-50 rounded-lg p-4 border-l-4 border-green-500 shadow">
+                    <p class="font-semibold text-gray-800">What don't you like?</p>
+                    <p class="text-gray-600 text-sm">→ คุณไม่ชอบอะไร</p>
+                </div>
+                <div class="example-card bg-green-50 rounded-lg p-4 border-l-4 border-green-500 shadow">
+                    <p class="font-semibold text-gray-800">Do you like …?</p>
+                    <p class="text-gray-600 text-sm">→ คุณชอบ…ไหม</p>
+                </div>
+                <div class="example-card bg-green-50 rounded-lg p-4 border-l-4 border-green-500 shadow">
+                    <p class="font-semibold text-gray-800">What are you interested in?</p>
+                    <p class="text-gray-600 text-sm">→ คุณสนใจอะไร</p>
+                </div>
+                <div class="example-card bg-green-50 rounded-lg p-4 border-l-4 border-green-500 shadow">
+                    <p class="font-semibold text-gray-800">What do you prefer, A or B?</p>
+                    <p class="text-gray-600 text-sm">→ คุณชอบอะไรระหว่าง A หรือ B</p>
+                </div>
+                <div class="example-card bg-green-50 rounded-lg p-4 border-l-4 border-green-500 shadow">
+                    <p class="font-semibold text-gray-800">How do you feel about …?</p>
+                    <p class="text-gray-600 text-sm">→ คุณรู้สึกยังไงเกี่ยวกับ…</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vocabulary Section -->
+        <div class="glass-effect rounded-2xl shadow-2xl p-8 mb-8 fade-in-up" style="animation-delay:.68s">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="bg-gradient-to-br from-orange-500 to-red-500 p-3 rounded-lg shadow-lg">
+                    <i data-lucide="book" class="w-8 h-8 text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">คำศัพท์หมวดความชอบ/ไม่ชอบ (Extra Vocabulary)</h3>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border-l-4 border-green-500 shadow">
+                    <h4 class="text-lg font-bold text-green-700 mb-4 flex items-center">
+                        <i data-lucide="thumbs-up" class="w-5 h-5 mr-2"></i> Likes (ความชอบ)
+                    </h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="music" class="w-5 h-5 mx-auto mb-1 text-green-600"></i>
+                            <p class="font-medium text-gray-800">music</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="film" class="w-5 h-5 mx-auto mb-1 text-green-600"></i>
+                            <p class="font-medium text-gray-800">movies</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="trophy" class="w-5 h-5 mx-auto mb-1 text-green-600"></i>
+                            <p class="font-medium text-gray-800">sports</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="book-open" class="w-5 h-5 mx-auto mb-1 text-green-600"></i>
+                            <p class="font-medium text-gray-800">reading</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="plane" class="w-5 h-5 mx-auto mb-1 text-green-600"></i>
+                            <p class="font-medium text-gray-800">traveling</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="heart" class="w-5 h-5 mx-auto mb-1 text-green-600"></i>
+                            <p class="font-medium text-gray-800">pets</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="pizza" class="w-5 h-5 mx-auto mb-1 text-green-600"></i>
+                            <p class="font-medium text-gray-800">food</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="users" class="w-5 h-5 mx-auto mb-1 text-green-600"></i>
+                            <p class="font-medium text-gray-800">friends</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-6 border-l-4 border-red-500 shadow">
+                    <h4 class="text-lg font-bold text-red-700 mb-4 flex items-center">
+                        <i data-lucide="thumbs-down" class="w-5 h-5 mr-2"></i> Dislikes (ความไม่ชอบ)
+                    </h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="alert-triangle" class="w-5 h-5 mx-auto mb-1 text-red-600"></i>
+                            <p class="font-medium text-gray-800">homework</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="umbrella-off" class="w-5 h-5 mx-auto mb-1 text-red-600"></i>
+                            <p class="font-medium text-gray-800">rainy days</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="zap-off" class="w-5 h-5 mx-auto mb-1 text-red-600"></i>
+                            <p class="font-medium text-gray-800">waking up early</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="volume-x" class="w-5 h-5 mx-auto mb-1 text-red-600"></i>
+                            <p class="font-medium text-gray-800">loud noises</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="x-circle" class="w-5 h-5 mx-auto mb-1 text-red-600"></i>
+                            <p class="font-medium text-gray-800">spicy food</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="user-x" class="w-5 h-5 mx-auto mb-1 text-red-600"></i>
+                            <p class="font-medium text-gray-800">rude people</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="activity" class="w-5 h-5 mx-auto mb-1 text-red-600"></i>
+                            <p class="font-medium text-gray-800">being tired</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center">
+                            <i data-lucide="ban" class="w-5 h-5 mx-auto mb-1 text-red-600"></i>
+                            <p class="font-medium text-gray-800">waiting</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Navigation Buttons -->
+        <div class="flex justify-between items-center mt-12 max-w-2xl mx-auto">
+            <a href="unit2.html" class="btn-prev flex items-center px-6 py-3 rounded-lg font-bold text-lg shadow hover:shadow-xl">
+                <i data-lucide="chevron-left" class="w-6 h-6 mr-2"></i> Unit 2
+            </a>
+            <a href="quiz.html" class="btn-next flex items-center px-6 py-3 rounded-lg font-bold text-lg shadow hover:shadow-xl">
+                Quiz <i data-lucide="arrow-right" class="w-6 h-6 ml-2"></i>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        // Animate fade-in-up for content sections
+        document.querySelectorAll('.fade-in-up').forEach((el, idx) => {
+            el.style.opacity = 0;
+            el.style.animationDelay = (el.style.animationDelay || (0.1 + idx * 0.07) + "s");
+        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                    entry.target.style.opacity = 1;
+                }
+            });
+        }, {threshold: 0.10});
+        document.querySelectorAll('.fade-in-up').forEach(card => observer.observe(card));
+    </script>
+</body>
+</html>
